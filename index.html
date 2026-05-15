@@ -39,9 +39,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 3rem;
-    background: rgba(13,13,13,0.92);
+    background: rgba(13,13,13,0.9);
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
   }
 
@@ -51,7 +50,6 @@
     letter-spacing: 0.12em;
     color: var(--white);
     text-decoration: none;
-    flex-shrink: 0;
   }
 
   .nav-logo span { color: var(--red); }
@@ -85,17 +83,17 @@
     transition: opacity 0.2s !important;
   }
 
-  .nav-cta:hover { opacity: 0.85; }
+  .nav-cta:hover { opacity: 0.85; color: var(--white) !important; }
 
   /* ── HERO ── */
   .hero {
-    position: relative;
     height: 100vh;
-    min-height: 600px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 8rem 3rem 5rem;
+    position: relative;
     overflow: hidden;
   }
 
@@ -106,35 +104,21 @@
     z-index: 0;
   }
 
-  .hero-bg iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 177.78vh;
-    min-width: 100%;
-    height: 56.25vw;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
   .hero-bg::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom,
-      rgba(13,13,13,0.3) 0%,
-      rgba(13,13,13,0.15) 40%,
-      rgba(13,13,13,0.8) 100%);
+    background: linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.15) 40%, rgba(13,13,13,0.75) 100%);
     z-index: 1;
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
+  .hero-bg-grid {
+    display: none;
   }
 
   .hero-tag {
+    position: relative;
+    z-index: 2;
     font-size: 0.7rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -144,6 +128,8 @@
   }
 
   .hero-title {
+    position: relative;
+    z-index: 2;
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(5rem, 14vw, 11rem);
     line-height: 0.88;
@@ -157,6 +143,8 @@
   }
 
   .hero-sub {
+    position: relative;
+    z-index: 2;
     font-size: 1rem;
     color: rgba(245,245,240,0.55);
     font-weight: 300;
@@ -166,6 +154,8 @@
   }
 
   .hero-scroll {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -181,7 +171,6 @@
     width: 40px;
     height: 1px;
     background: var(--red);
-    flex-shrink: 0;
   }
 
   /* ── SHARED ── */
@@ -211,12 +200,7 @@
   }
 
   /* ── FILMS ── */
-  #films {
-    border-top: 1px solid var(--border);
-    position: relative;
-    z-index: 2;
-    background: var(--black);
-  }
+  #films { border-top: 1px solid var(--border); position: relative; z-index: 2; background: var(--black); }
 
   .films-header {
     display: flex;
@@ -233,61 +217,51 @@
     background: var(--border);
   }
 
-  /* ── FILM CARD ── */
   .film-card {
     position: relative;
     aspect-ratio: 16/10;
     background: #111;
     overflow: hidden;
     cursor: pointer;
+    text-decoration: none;
     display: block;
   }
 
-  .film-thumb {
+  .film-card-placeholder {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #161616 0%, #111 50%, #131313 100%);
   }
 
-  .film-card:hover .film-thumb {
-    transform: scale(1.04);
-  }
-
-  .film-play-hover {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
-    width: 56px;
-    height: 56px;
-    border: 2px solid rgba(245,245,240,0.9);
+  .film-play {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid rgba(245,245,240,0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.25s, transform 0.25s;
-    background: rgba(13,13,13,0.5);
-    backdrop-filter: blur(4px);
+    transition: border-color 0.3s;
+    flex-shrink: 0;
   }
 
-  .film-play-hover::after {
+  .film-play::after {
     content: '';
     display: block;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 9px 0 9px 16px;
-    border-color: transparent transparent transparent var(--white);
-    margin-left: 5px;
+    border-width: 7px 0 7px 12px;
+    border-color: transparent transparent transparent rgba(245,245,240,0.4);
+    margin-left: 3px;
+    transition: border-left-color 0.3s;
   }
 
-  .film-card:hover .film-play-hover {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  .film-card:hover .film-play { border-color: var(--red); }
+  .film-card:hover .film-play::after { border-left-color: var(--red); }
 
   .film-overlay {
     position: absolute;
@@ -325,7 +299,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.85rem;
     letter-spacing: 0.15em;
-    color: rgba(245,245,240,0.2);
+    color: rgba(245,245,240,0.15);
   }
 
   .film-card::after {
@@ -340,62 +314,33 @@
 
   .film-card:hover::after { transform: scaleX(1); }
 
-  /* ── VIDEO MODAL ── */
-  #video-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    background: rgba(0,0,0,0.92);
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-
-  #video-modal.open {
-    display: flex;
-  }
-
-  .modal-inner {
-    position: relative;
-    width: 100%;
-    max-width: 960px;
-    aspect-ratio: 16/9;
-    background: #000;
-  }
-
-  .modal-inner iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-  }
-
-  .modal-close {
+  .film-card .film-play-hover {
     position: absolute;
-    top: -2.5rem;
-    right: 0;
-    background: none;
-    border: none;
-    color: rgba(245,245,240,0.7);
-    font-size: 1.5rem;
-    cursor: pointer;
-    letter-spacing: 0.1em;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.2s;
-    padding: 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 52px; height: 52px;
+    border: 2px solid rgba(245,245,240,0.8);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.25s;
+    background: rgba(13,13,13,0.5);
+    backdrop-filter: blur(4px);
   }
 
-  .modal-close:hover { color: var(--white); }
+  .film-card .film-play-hover::after {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 14px;
+    border-color: transparent transparent transparent var(--white);
+    margin-left: 4px;
+  }
 
-  .modal-close::before {
-    content: '✕';
-    font-size: 1rem;
+  .film-card:hover .film-play-hover {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   /* ── ABOUT ── */
@@ -414,13 +359,31 @@
     overflow: hidden;
   }
 
-  .about-accent {
+  .about-visual-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #161616 0%, #0f0f0f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .about-visual-inner::before {
+    content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 60px;
-    background: var(--red);
-    z-index: 1;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(224,26,26,0.08), transparent 60%);
+  }
+
+  .about-initials {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    letter-spacing: -0.02em;
+    color: rgba(245,245,240,0.04);
+    position: relative;
+    line-height: 1;
+    user-select: none;
   }
 
   .about-photo-note {
@@ -431,15 +394,14 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(245,245,240,0.25);
-    z-index: 1;
   }
 
-  .about-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
+  .about-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 60px;
+    background: var(--red);
   }
 
   .about-bio {
@@ -482,43 +444,6 @@
     margin-top: 0.4rem;
   }
 
-  /* ── MID CTA ── */
-  .mid-cta {
-    padding: 4rem 3rem;
-    border-top: 1px solid var(--border);
-    background: #111;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .mid-cta-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-
-  .mid-cta-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: 0.04em;
-    line-height: 1;
-    color: var(--white);
-    margin-bottom: 0.75rem;
-  }
-
-  .mid-cta-sub {
-    font-size: 0.9rem;
-    color: rgba(245,245,240,0.45);
-    font-weight: 300;
-    max-width: 420px;
-  }
-
   /* ── PEREZ & CO CTA ── */
   .perez-cta-section {
     padding: 5rem 3rem;
@@ -544,25 +469,6 @@
     max-width: 380px;
   }
 
-  .btn-red {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--red);
-    color: var(--white);
-    text-decoration: none;
-    padding: 1rem 2rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: opacity 0.2s;
-  }
-
-  .btn-red:hover { opacity: 0.85; }
-
   .btn-outline {
     display: inline-flex;
     align-items: center;
@@ -585,9 +491,8 @@
     color: var(--black);
   }
 
-  .arrow { transition: transform 0.2s; }
-  .btn-outline:hover .arrow,
-  .btn-red:hover .arrow { transform: translateX(4px); }
+  .btn-outline .arrow { transition: transform 0.2s; }
+  .btn-outline:hover .arrow { transform: translateX(4px); }
 
   /* ── FOOTER ── */
   footer {
@@ -625,154 +530,14 @@
 
   .footer-contact:hover { color: var(--white); }
 
-  /* ── LEAD POPUP ── */
-  #lead-popup {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 320px;
-    background: #161616;
-    border: 1px solid rgba(245,245,240,0.1);
-    border-left: 3px solid var(--red);
-    z-index: 9997;
-    padding: 2rem;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    transform: translateY(120%);
-    opacity: 0;
-    transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease;
-    pointer-events: none;
-  }
-
-  #lead-popup.visible {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  #lead-popup-close {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    background: none;
-    border: none;
-    color: rgba(245,245,240,0.35);
-    font-size: 1.1rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0.25rem 0.5rem;
-    transition: color 0.2s;
-  }
-
-  #lead-popup-close:hover { color: var(--white); }
-
-  .popup-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-
-  .popup-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.04em;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-  }
-
-  .popup-sub {
-    font-size: 0.78rem;
-    color: rgba(245,245,240,0.45);
-    font-weight: 300;
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
-  }
-
-  .popup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .popup-form input,
-  .popup-form textarea {
-    background: rgba(245,245,240,0.05);
-    border: 1px solid rgba(245,245,240,0.1);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    padding: 0.65rem 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-  }
-
-  .popup-form input::placeholder,
-  .popup-form textarea::placeholder { color: rgba(245,245,240,0.25); }
-
-  .popup-form input:focus,
-  .popup-form textarea:focus { border-color: var(--red); }
-
-  .popup-form textarea {
-    resize: none;
-    height: 72px;
-    line-height: 1.5;
-  }
-
-  .popup-submit {
-    background: var(--red);
-    color: var(--white);
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    width: 100%;
-  }
-
-  .popup-submit:hover { opacity: 0.85; }
-
-  .popup-success {
-    display: none;
-    text-align: center;
-    padding: 1rem 0;
-  }
-
-  .popup-success .success-icon {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .popup-success p {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.06em;
-    color: var(--white);
-    margin-bottom: 0.4rem;
-  }
-
-  .popup-success span {
-    font-size: 0.78rem;
-    color: rgba(245,245,240,0.4);
-  }
-
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1.25rem 1.5rem; }
     .nav-links { gap: 1.5rem; }
-
-    .hero {
-      padding: 6rem 1.5rem 4rem;
-    }
-
     section { padding: 5rem 1.5rem; }
+
+    /* FIX: hero needs left padding so text doesn't clip */
+    .hero { padding: 6rem 1.5rem 4rem; }
 
     .films-grid { grid-template-columns: repeat(2, 1fr); }
     .films-header { flex-direction: column; align-items: flex-start; }
@@ -790,75 +555,32 @@
       padding: 4rem 1.5rem;
     }
 
-    .mid-cta {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 3rem 1.5rem;
-    }
-
     footer { padding: 2rem 1.5rem; }
   }
 
   @media (max-width: 580px) {
-    nav { padding: 1rem 1.25rem; }
+    .films-grid { grid-template-columns: 1fr; }
     .nav-links { gap: 1rem; }
     .nav-links .nav-films,
     .nav-links .nav-about { display: none; }
     .nav-links li:has(a[href*="instagram"]) { display: none; }
-
-    .hero {
-      padding: 5rem 1.25rem 3rem;
-      min-height: 100svh;
-    }
-
-    .hero-title {
-      font-size: clamp(3.8rem, 20vw, 6rem);
-    }
-
-    .hero-sub {
-      font-size: 0.88rem;
-      margin-bottom: 2rem;
-    }
-
-    section { padding: 3.5rem 1.25rem; }
-
-    .films-grid { grid-template-columns: 1fr; }
-    .films-header { margin-bottom: 2.5rem; }
-
     .about-stats { grid-template-columns: 1fr 1fr; }
+    nav { padding: 1rem 1.5rem; }
 
-    .perez-cta-section { padding: 3rem 1.25rem; }
+    /* FIX: tighten hero on small phones */
+    .hero { padding: 5rem 1.25rem 3rem; }
 
-    .mid-cta { padding: 3rem 1.25rem; }
+    /* FIX: reduce huge gap between hero and films */
+    #films { padding-top: 3.5rem; }
 
-    footer {
-      padding: 1.5rem 1.25rem;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
+    /* FIX: films header less bottom margin on mobile */
+    .films-header { margin-bottom: 2rem; }
 
-    #lead-popup {
-      bottom: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      border-left: none;
-      border-top: 3px solid var(--red);
-      border-radius: 0;
-    }
-
-    .modal-inner {
-      aspect-ratio: 16/9;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .hero-title {
-      font-size: clamp(3.2rem, 18vw, 5rem);
-    }
+    /* FIX: mid-page CTA padding */
+    section[style*="padding: 4rem 3rem"] { padding: 3rem 1.25rem !important; }
   }
 </style>
+<script src="https://player.vimeo.com/api/player.js"></script>
 </head>
 <body>
 
@@ -874,21 +596,15 @@
 </nav>
 
 <!-- ── HERO ── -->
+<!-- FIX: hero-bg is now INSIDE the .hero wrapper so text is positioned correctly -->
 <section class="hero">
   <div class="hero-bg">
-    <iframe
-      src="https://player.vimeo.com/video/1192451701?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
-      frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-      title="Road 2 Overall Champion - Behind The Scenes">
-    </iframe>
+    <iframe src="https://player.vimeo.com/video/1192451701?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);pointer-events:none;" title="Road 2 Overall Champion - Behind The Scenes"></iframe>
   </div>
-  <div class="hero-content">
-    <p class="hero-tag">Director &nbsp;·&nbsp; Storyteller &nbsp;·&nbsp; Valencia, CA</p>
-    <h1 class="hero-title">Jose<br><em>Perez</em></h1>
-    <p class="hero-sub">Cinematic stories that move people. From brand films to personal narratives — every frame intentional.</p>
-    <div class="hero-scroll">Scroll to explore</div>
-  </div>
+  <p class="hero-tag">Director &nbsp;·&nbsp; Storyteller &nbsp;·&nbsp; Valencia, CA</p>
+  <h1 class="hero-title">Jose<br><em>Perez</em></h1>
+  <p class="hero-sub">Cinematic stories that move people. From brand films to personal narratives — every frame intentional.</p>
+  <div class="hero-scroll">Scroll to explore</div>
 </section>
 
 <!-- ── FILMS ── -->
@@ -899,125 +615,96 @@
       <h2 class="section-title">Films</h2>
       <div class="divider"></div>
     </div>
-    <p style="font-size:0.8rem; color:rgba(245,245,240,0.35); max-width:260px; text-align:right; font-style:italic; line-height:1.6;">
-      Click any film to watch inline.
-    </p>
+    <p style="font-size:0.8rem; color: rgba(245,245,240,0.35); max-width: 260px; text-align: right; font-style: italic; line-height: 1.6;">Click any film to watch on YouTube.</p>
   </div>
 
   <div class="films-grid">
 
-    <!-- Film 01 — YouTube -->
-    <div class="film-card"
-         data-src="https://www.youtube.com/embed/UhE8zmWTzp0?autoplay=1&rel=0"
-         onclick="openModal(this)">
-      <img class="film-thumb" src="https://img.youtube.com/vi/UhE8zmWTzp0/maxresdefault.jpg" alt="Callum Walsh — UFC Fight Doc Promo">
+    <!-- Film 01 -->
+    <a class="film-card" href="https://youtu.be/UhE8zmWTzp0?si=2-aiEqFXzcEupxWX" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/UhE8zmWTzp0/maxresdefault.jpg" alt="Callum Walsh — UFC Fight Doc Promo" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div class="film-play-hover"></div>
       <span class="film-num">01</span>
       <div class="film-overlay">
         <p class="film-cat">Fight Doc Promo</p>
         <p class="film-name">Callum Walsh</p>
       </div>
-    </div>
+    </a>
 
-    <!-- Film 02 — Vimeo -->
-    <div class="film-card"
-         data-src="https://player.vimeo.com/video/909845416?autoplay=1&title=0&byline=0&portrait=0"
-         onclick="openModal(this)">
-      <img class="film-thumb" src="https://img.youtube.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="We Do Transformation — Fitness Commercial">
+    <!-- Film 02 -->
+    <a class="film-card" href="https://vimeo.com/909845416" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="We Do Transformation — Fitness Commercial" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div class="film-play-hover"></div>
       <span class="film-num">02</span>
       <div class="film-overlay">
         <p class="film-cat">Fitness Commercial</p>
         <p class="film-name">We Do Transformation</p>
       </div>
-    </div>
+    </a>
 
-    <!-- Film 03 — Vimeo -->
-    <div class="film-card"
-         data-src="https://player.vimeo.com/video/919708133?autoplay=1&title=0&byline=0&portrait=0"
-         onclick="openModal(this)">
-      <img class="film-thumb" src="https://img.youtube.com/vi/YYXELm1BjYc/maxresdefault.jpg" alt="Redline Athletics">
+    <!-- Film 03 -->
+    <a class="film-card" href="https://vimeo.com/919708133" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/YYXELm1BjYc/maxresdefault.jpg" alt="Redline Athletics" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div class="film-play-hover"></div>
       <span class="film-num">03</span>
       <div class="film-overlay">
         <p class="film-cat">Brand Film</p>
         <p class="film-name">Redline Athletics</p>
       </div>
-    </div>
+    </a>
 
-    <!-- Film 04 — Vimeo -->
-    <div class="film-card"
-         data-src="https://player.vimeo.com/video/1192451701?autoplay=1&title=0&byline=0&portrait=0"
-         onclick="openModal(this)">
-      <img class="film-thumb" src="https://img.youtube.com/vi/FAibXY8Ld8k/maxresdefault.jpg" alt="Road 2 Overall Champion — Trailer">
+    <!-- Film 04 -->
+    <a class="film-card" href="https://vimeo.com/1192451701" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/FAibXY8Ld8k/maxresdefault.jpg" alt="Road 2 Overall Champion — Trailer" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div class="film-play-hover"></div>
       <span class="film-num">04</span>
       <div class="film-overlay">
         <p class="film-cat">Trailer</p>
         <p class="film-name">Road 2 Overall Champion</p>
       </div>
-    </div>
+    </a>
 
-    <!-- Film 05 — YouTube -->
-    <div class="film-card"
-         data-src="https://www.youtube.com/embed/jvkMbBbjMKQ?autoplay=1&rel=0"
-         onclick="openModal(this)">
-      <img class="film-thumb" src="https://img.youtube.com/vi/jvkMbBbjMKQ/maxresdefault.jpg" alt="Jesus Loves You International — Mini Doc">
+    <!-- Film 05 -->
+    <a class="film-card" href="https://youtu.be/jvkMbBbjMKQ?si=e85qhtFylaSYxZrO" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/jvkMbBbjMKQ/maxresdefault.jpg" alt="Jesus Loves You International — Mini Doc" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div class="film-play-hover"></div>
       <span class="film-num">05</span>
       <div class="film-overlay">
         <p class="film-cat">Mini Doc</p>
         <p class="film-name">Jesus Loves You International</p>
       </div>
-    </div>
+    </a>
 
-    <!-- Film 06 — YouTube -->
-    <div class="film-card"
-         data-src="https://www.youtube.com/embed/yzv8UNO5rU8?autoplay=1&rel=0"
-         onclick="openModal(this)">
-      <img class="film-thumb" src="https://img.youtube.com/vi/yzv8UNO5rU8/maxresdefault.jpg" alt="The Life of Taurean Dorotae Lee — Feature Doc Trailer">
+    <!-- Film 06 -->
+    <a class="film-card" href="https://youtu.be/yzv8UNO5rU8?si=T7z_fhs0jmUlQsF9" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/yzv8UNO5rU8/maxresdefault.jpg" alt="The Life of Taurean Dorotae Lee — Feature Doc Trailer" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div class="film-play-hover"></div>
       <span class="film-num">06</span>
       <div class="film-overlay">
         <p class="film-cat">Feature Doc · Trailer</p>
         <p class="film-name">The Life of Taurean Dorotae Lee</p>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
 
-<!-- ── VIDEO MODAL ── -->
-<div id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
-  <div class="modal-inner">
-    <button class="modal-close" onclick="closeModal()">Close</button>
-    <iframe id="modal-iframe" src="" frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-      allowfullscreen>
-    </iframe>
-  </div>
-</div>
-
-<!-- ── MID CTA ── -->
-<div class="mid-cta">
+<!-- ── MID-PAGE CTA ── -->
+<section style="padding: 4rem 3rem; border-top: 1px solid rgba(245,245,240,0.1); background: #111; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
   <div>
-    <p class="mid-cta-label">Ready to Work Together?</p>
-    <h2 class="mid-cta-title">Let's build something<br>worth watching.</h2>
-    <p class="mid-cta-sub">Brand films, social content, and story-driven video for businesses ready to be seen.</p>
+    <p style="font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: #E01A1A; margin-bottom: 0.75rem; font-weight: 500; font-family: 'DM Sans', sans-serif;">Ready to Work Together?</p>
+    <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.04em; line-height: 1; color: #F5F5F0; margin-bottom: 0.75rem;">Let's build something<br>worth watching.</h2>
+    <p style="font-size: 0.9rem; color: rgba(245,245,240,0.45); font-weight: 300; max-width: 420px; font-family: 'DM Sans', sans-serif;">Brand films, social content, and story-driven video for businesses ready to be seen.</p>
   </div>
-  <a href="https://perezandcofilms.com" target="_blank" rel="noopener" class="btn-red">
-    Visit Perez &amp; Co. Films <span class="arrow">→</span>
-  </a>
-</div>
+  <a href="https://perezandcofilms.com" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.75rem; background: #E01A1A; color: #F5F5F0; text-decoration: none; padding: 1rem 2rem; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Visit Perez &amp; Co. Films &rarr;</a>
+</section>
 
 <!-- ── ABOUT ── -->
 <section id="about">
 
   <div class="about-visual">
     <div class="about-accent"></div>
-    <img src="data:image/jpeg;base64,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l5oopgFFFLQAUlGaKQBSdqKKQCUlLSUAGBS9OlFFMBCMUYpc0maBARikpSaT3oAKO9FGaYC5oHWkzRQAGkNLRQAmKQ040lADqKPaigAopOaWgBKKKKAA0lLiigBKXFGKB3oATFGKXNFABikooFABmikpTQAUUUUAFFFFABRSUtACYoxS0oFAwFGKKBQAYooxRigBuKUUmaWgBc0UUUAFAJ4pRRmgBKUUuKMUCEpaSloATFGKXFGKAEx7UdaWlFADQKXFLS0ANpaWloAQUdKKKAGikx0paKAA4pMCl5ooAMCmilzijigAoFFAOaAEzilpMUUAHakpaKAExRS0UAJR70UUAIaUetITSjrQAuaB1ppP6UHgUAO5oFIpGOlKKAFzRTc0maAHUmaQHNGaAHA0ppM0A5oAWiijNABSUuKKACjFGaTNAC5pKKXFACUUtFACY4o6UpoH0oASmjNKelAoABRuoHTNJmgBcikz6UGk7mgBTRSdKMUALSZxRRj3oAUnNBpBRmgBQaKM0maAHZ9qTNJmkDUAPBpN1LmmkUwF9qTNFJmgBc0YpM0ZoAWlzSUmaAH02kFGaAHZpM00mjNAB70ZpM5ooAXNJRmgZoAKOlJml60ABNJmijFACijFLRigBMZpaaaWigBM0UuKKYCYo+tFLQAlFLSYoAWkGQaXFJ0oAKMDsaKO9ACmkzS0UgExikxTqSgBuOaDilPFIKADikpaKACjvRjFGKACiijigAPSiiigBQKUiigBBmjFFAoAKKKKACiiigAoopaACgCiigBKWiigBKWiigBKWiigApD0paKAEoopaAEopaKAEoopaAEoopaAEopaMUAFJS0lABSUtIaAFooooAKKKKAD60UUUAFFFFABRRRQA4UuaSigAzRRRQAUUUUAFGKKKACiiigAxS4oooACKXFFFABijFFFAABRS0UAJiloooASloooASmtpaKAEzRSUtABikpaKAExiiiloATFGKWimISjFKaKAGmlFKaKAEpM+1FKKAEopQKBQAlLS0UCEzigUvFGKAEApMU6kxQA0DHSnikpaAGY9qQD1p9FADcUlOooAbj1pMCnUYoAbitBpM0hpM8UAf/Z"
-         alt="Jose Perez — Director">
-    <p class="about-photo-note">Director · Valencia, CA</p>
+    <img src="https://raw.githubusercontent.com/joseperezfilms/joseperezfilms/main/jose.jpg" alt="Jose Perez — Director" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
   </div>
 
   <div class="about-content">
@@ -1075,6 +762,143 @@
 </footer>
 
 <!-- ── LEAD CAPTURE POPUP ── -->
+<style>
+  #lead-popup {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 320px;
+    background: #161616;
+    border: 1px solid rgba(245,245,240,0.1);
+    border-left: 3px solid #E01A1A;
+    z-index: 9999;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease;
+    pointer-events: none;
+  }
+  #lead-popup.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+  #lead-popup-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    color: rgba(245,245,240,0.35);
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    transition: color 0.2s;
+  }
+  #lead-popup-close:hover { color: #F5F5F0; }
+  .popup-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #E01A1A;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .popup-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    color: #F5F5F0;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .popup-sub {
+    font-size: 0.78rem;
+    color: rgba(245,245,240,0.45);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.5;
+  }
+  .popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .popup-form input,
+  .popup-form textarea {
+    background: rgba(245,245,240,0.05);
+    border: 1px solid rgba(245,245,240,0.1);
+    color: #F5F5F0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.65rem 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .popup-form input::placeholder,
+  .popup-form textarea::placeholder { color: rgba(245,245,240,0.25); }
+  .popup-form input:focus,
+  .popup-form textarea:focus { border-color: #E01A1A; }
+  .popup-form textarea {
+    resize: none;
+    height: 72px;
+    line-height: 1.5;
+  }
+  .popup-submit {
+    background: #E01A1A;
+    color: #F5F5F0;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: 100%;
+  }
+  .popup-submit:hover { opacity: 0.85; }
+  .popup-success {
+    display: none;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .popup-success .success-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .popup-success p {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: #F5F5F0;
+    margin-bottom: 0.4rem;
+  }
+  .popup-success span {
+    font-size: 0.78rem;
+    color: rgba(245,245,240,0.4);
+    font-family: 'DM Sans', sans-serif;
+  }
+  @media (max-width: 480px) {
+    #lead-popup {
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      border-left: none;
+      border-top: 3px solid #E01A1A;
+    }
+  }
+</style>
+
 <div id="lead-popup" role="dialog" aria-label="Send a quick message">
   <button id="lead-popup-close" aria-label="Close">&times;</button>
   <p class="popup-label">Let's Work Together</p>
@@ -1082,8 +906,8 @@
   <p class="popup-sub">Tell me about your project — I'll get back to you within 24 hours.</p>
   <div id="popup-form-wrap">
     <form class="popup-form" id="lead-form" onsubmit="handlePopupSubmit(event)">
-      <input type="text" name="name" placeholder="Your name" required autocomplete="name">
-      <input type="email" name="email" placeholder="Email address" required autocomplete="email">
+      <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+      <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
       <textarea name="message" placeholder="What are you working on?" required></textarea>
       <button type="submit" class="popup-submit">Send Message &rarr;</button>
     </form>
@@ -1096,42 +920,16 @@
 </div>
 
 <script>
-  /* ── VIDEO MODAL ── */
-  function openModal(card) {
-    var src = card.getAttribute('data-src');
-    document.getElementById('modal-iframe').src = src;
-    document.getElementById('video-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('video-modal').classList.remove('open');
-    document.getElementById('modal-iframe').src = '';
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('video-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  /* ── LEAD POPUP ── */
-  (function () {
+  (function() {
     var popup = document.getElementById('lead-popup');
     var closeBtn = document.getElementById('lead-popup-close');
     var shown = false;
     var dismissed = false;
-
-    try { if (sessionStorage.getItem('popup_dismissed')) dismissed = true; } catch (e) {}
-
     function onScroll() {
       if (shown || dismissed) return;
       var scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
       if (scrolled >= 0.35) {
-        setTimeout(function () {
+        setTimeout(function() {
           if (!dismissed) {
             popup.classList.add('visible');
             shown = true;
@@ -1139,14 +937,15 @@
         }, 600);
       }
     }
-
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    closeBtn.addEventListener('click', function () {
+    closeBtn.addEventListener('click', function() {
       popup.classList.remove('visible');
       dismissed = true;
-      try { sessionStorage.setItem('popup_dismissed', '1'); } catch (e) {}
+      try { sessionStorage.setItem('popup_dismissed', '1'); } catch(e) {}
     });
+    try {
+      if (sessionStorage.getItem('popup_dismissed')) dismissed = true;
+    } catch(e) {}
   })();
 
   function handlePopupSubmit(e) {
@@ -1157,14 +956,16 @@
       method: 'POST',
       body: data,
       headers: { 'Accept': 'application/json' }
-    }).then(function (res) {
-      document.getElementById('popup-form-wrap').style.display = 'none';
-      document.getElementById('popup-success').style.display = 'block';
-      setTimeout(function () {
-        document.getElementById('lead-popup').classList.remove('visible');
-        try { sessionStorage.setItem('popup_dismissed', '1'); } catch (e) {}
-      }, 3000);
-    }).catch(function () {
+    }).then(function(res) {
+      if (res.ok) {
+        document.getElementById('popup-form-wrap').style.display = 'none';
+        document.getElementById('popup-success').style.display = 'block';
+        setTimeout(function() {
+          document.getElementById('lead-popup').classList.remove('visible');
+          try { sessionStorage.setItem('popup_dismissed', '1'); } catch(e) {}
+        }, 3000);
+      }
+    }).catch(function() {
       document.getElementById('popup-form-wrap').style.display = 'none';
       document.getElementById('popup-success').style.display = 'block';
     });
