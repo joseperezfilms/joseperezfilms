@@ -554,12 +554,15 @@
     footer { padding: 2rem 1.5rem; }
   }
 
-  @media (max-width: 580px) {
-    .films-grid { grid-template-columns: 1fr; }
-    .nav-links .nav-films,
-    .nav-links .nav-about { display: none; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
-  }
+@media (max-width: 580px) {
+  .films-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 1rem; }
+  .nav-links .nav-films,
+  .nav-links .nav-about { display: none; }
+.nav-links li:has(a[href*="instagram"]) { display: none; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  nav { padding: 1rem 1.5rem; }
+}
 </style>
 <script src="https://player.vimeo.com/api/player.js"></script>
 </head>
