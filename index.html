@@ -888,10 +888,10 @@ footer {
       <div class="divider"></div>
       <p class="contact-promise">Tell me about your project and I'll come back with a clear plan and honest pricing — usually within 24 hours. No obligation, no pressure.</p>
       <div class="contact-details">
-        <div class="contact-detail"><div class="contact-detail-dot"></div><span>Brand films starting at $3,500</span></div>
-        <div class="contact-detail"><div class="contact-detail-dot"></div><span>Social content packages available</span></div>
+        <div class="contact-detail"><div class="contact-detail-dot"></div><span>Brand films, social content &amp; commercial video</span></div>
         <div class="contact-detail"><div class="contact-detail-dot"></div><span>Serving LA, Valencia, and all of SoCal</span></div>
         <div class="contact-detail"><div class="contact-detail-dot"></div><span>Response within 24 hours, guaranteed</span></div>
+        <div class="contact-detail"><div class="contact-detail-dot"></div><span>No obligation · Just a real conversation</span></div>
       </div>
     </div>
     <div>
@@ -902,21 +902,10 @@ footer {
       <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
         <div class="form-row">
           <input type="text" name="name" placeholder="Your name" required autocomplete="name">
-          <input type="text" name="business" placeholder="Business name">
-        </div>
-        <div class="form-row">
           <input type="email" name="email" placeholder="Email address" required autocomplete="email">
-          <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel">
         </div>
-        <select name="budget" required>
-          <option value="" disabled selected>What's your budget range?</option>
-          <option value="under-3500">Under $3,500</option>
-          <option value="3500-7500">$3,500 – $7,500</option>
-          <option value="7500-15000">$7,500 – $15,000</option>
-          <option value="15000+">$15,000+</option>
-          <option value="not-sure">Not sure yet</option>
-        </select>
-        <textarea name="message" placeholder="Tell me about your project — what do you want people to feel when they watch your video?" required></textarea>
+        <input type="text" name="business" placeholder="Business name (optional)">
+        <textarea name="message" placeholder="Tell me about your project — what are you working on?" required></textarea>
         <button type="submit" class="form-submit">Send My Project Details →</button>
         <p class="form-note">No spam. No pressure. Just a real conversation about your business.</p>
       </form>
@@ -978,6 +967,124 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     }
   });
 });
+</script>
+
+<!-- ── SCROLL POPUP ── -->
+<style>
+#lead-popup {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 320px;
+  background: #161616;
+  border: 1px solid rgba(245,245,240,0.1);
+  border-left: 3px solid #E01A1A;
+  z-index: 9999;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease;
+  pointer-events: none;
+}
+#lead-popup.visible { transform: translateY(0); opacity: 1; pointer-events: all; }
+#lead-popup-close {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  background: none; border: none; color: rgba(245,245,240,0.35);
+  font-size: 1rem; cursor: pointer; padding: 0.25rem 0.5rem; transition: color 0.2s;
+}
+#lead-popup-close:hover { color: #F5F5F0; }
+.popup-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #E01A1A; margin-bottom: 0.5rem; font-weight: 500; font-family: 'DM Sans', sans-serif; }
+.popup-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; color: #F5F5F0; line-height: 1.1; margin-bottom: 0.5rem; }
+.popup-sub { font-size: 0.78rem; color: rgba(245,245,240,0.45); font-weight: 300; margin-bottom: 1.5rem; font-family: 'DM Sans', sans-serif; line-height: 1.5; }
+.popup-form { display: flex; flex-direction: column; gap: 0.75rem; }
+.popup-form input, .popup-form textarea {
+  background: rgba(245,245,240,0.05); border: 1px solid rgba(245,245,240,0.1);
+  color: #F5F5F0; font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+  padding: 0.65rem 0.9rem; outline: none; transition: border-color 0.2s;
+  border-radius: 0; width: 100%; box-sizing: border-box;
+}
+.popup-form input::placeholder, .popup-form textarea::placeholder { color: rgba(245,245,240,0.25); }
+.popup-form input:focus, .popup-form textarea:focus { border-color: #E01A1A; }
+.popup-form textarea { resize: none; height: 72px; line-height: 1.5; }
+.popup-submit {
+  background: #E01A1A; color: #F5F5F0; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em;
+  text-transform: uppercase; font-weight: 500; padding: 0.75rem 1rem;
+  cursor: pointer; transition: opacity 0.2s; width: 100%;
+}
+.popup-submit:hover { opacity: 0.85; }
+.popup-success { display: none; text-align: center; padding: 1rem 0; }
+.popup-success .success-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.popup-success p { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; color: #F5F5F0; margin-bottom: 0.4rem; }
+.popup-success span { font-size: 0.78rem; color: rgba(245,245,240,0.4); font-family: 'DM Sans', sans-serif; }
+@media (max-width: 480px) {
+  #lead-popup { bottom: 0; right: 0; left: 0; width: 100%; border-left: none; border-top: 3px solid #E01A1A; }
+}
+</style>
+
+<div id="lead-popup" role="dialog" aria-label="Send a quick message">
+  <button id="lead-popup-close" aria-label="Close">&times;</button>
+  <p class="popup-label">Let's Work Together</p>
+  <h2 class="popup-title">Send a Quick Message</h2>
+  <p class="popup-sub">Tell me about your project — I'll get back to you within 24 hours.</p>
+  <div id="popup-form-wrap">
+    <form class="popup-form" id="lead-popup-form" onsubmit="handlePopupSubmit(event)">
+      <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+      <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+      <textarea name="message" placeholder="What are you working on?" required></textarea>
+      <button type="submit" class="popup-submit">Send Message &rarr;</button>
+    </form>
+  </div>
+  <div class="popup-success" id="popup-success">
+    <div class="success-icon">✦</div>
+    <p>Message Sent</p>
+    <span>I'll be in touch soon.</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  var popup = document.getElementById('lead-popup');
+  var closeBtn = document.getElementById('lead-popup-close');
+  var shown = false;
+  var dismissed = false;
+  try { if (sessionStorage.getItem('popup_dismissed')) dismissed = true; } catch(e) {}
+  function onScroll() {
+    if (shown || dismissed) return;
+    var scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (scrolled >= 0.35) {
+      setTimeout(function() {
+        if (!dismissed) { popup.classList.add('visible'); shown = true; }
+      }, 600);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  closeBtn.addEventListener('click', function() {
+    popup.classList.remove('visible');
+    dismissed = true;
+    try { sessionStorage.setItem('popup_dismissed', '1'); } catch(e) {}
+  });
+})();
+
+function handlePopupSubmit(e) {
+  e.preventDefault();
+  var form = document.getElementById('lead-popup-form');
+  var data = new FormData(form);
+  fetch('https://formspree.io/f/mrejjvzr', {
+    method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+  }).then(function(res) {
+    document.getElementById('popup-form-wrap').style.display = 'none';
+    document.getElementById('popup-success').style.display = 'block';
+    setTimeout(function() {
+      document.getElementById('lead-popup').classList.remove('visible');
+      try { sessionStorage.setItem('popup_dismissed', '1'); } catch(e) {}
+    }, 3000);
+  }).catch(function() {
+    document.getElementById('popup-form-wrap').style.display = 'none';
+    document.getElementById('popup-success').style.display = 'block';
+  });
+}
 </script>
 
 </body>
