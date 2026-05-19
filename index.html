@@ -8,6 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<!-- Google Ads Conversion Tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17857128381"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17857128381');
+</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -955,9 +964,11 @@ function handleSubmit(e) {
   }).then(function(res) {
     form.style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
+    gtag('event', 'conversion', {'send_to': 'AW-17857128381/0jxkCLCDsK8cEL3P-MJC', 'value': 1.0, 'currency': 'USD'});
   }).catch(function() {
     form.style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
+    gtag('event', 'conversion', {'send_to': 'AW-17857128381/0jxkCLCDsK8cEL3P-MJC', 'value': 1.0, 'currency': 'USD'});
   });
 }
 
@@ -1080,6 +1091,7 @@ function handlePopupSubmit(e) {
   }).then(function(res) {
     document.getElementById('popup-form-wrap').style.display = 'none';
     document.getElementById('popup-success').style.display = 'block';
+    gtag('event', 'conversion', {'send_to': 'AW-17857128381/0jxkCLCDsK8cEL3P-MJC', 'value': 1.0, 'currency': 'USD'});
     setTimeout(function() {
       document.getElementById('lead-popup').classList.remove('visible');
       try { sessionStorage.setItem('popup_dismissed', '1'); } catch(e) {}
