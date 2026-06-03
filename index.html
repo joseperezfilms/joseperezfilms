@@ -270,25 +270,52 @@
     #work { background: var(--gray); padding-bottom: 0; }
     .work-header { text-align: center; margin-bottom: 56px; }
     .work-header .section-body { margin: 0 auto; max-width: 560px; }
-    .photo-grid {
+    /* Row 1: 3 equal horizontal tiles */
+    .photo-grid-top {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 3px;
+      margin-bottom: 3px;
     }
+    .photo-grid-top .photo-grid-item { aspect-ratio: 16/9; }
+    /* Row 2+: full-width cinematic strips for Shorts */
+    .short-strip {
+      position: relative; overflow: hidden;
+      width: 100%; height: 280px;
+      margin-top: 3px; cursor: pointer;
+      background: #0d0d0d;
+    }
+    .short-strip img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+      transition: transform .6s ease;
+      filter: saturate(.85) brightness(.95);
+    }
+    .short-strip:hover img { transform: scale(1.03); filter: saturate(1) brightness(1); }
+    .short-strip .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,.8) 0%, rgba(13,13,13,.05) 55%);
+      opacity: 0; transition: opacity .35s;
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .short-strip:hover .photo-overlay { opacity: 1; }
     .photo-grid-item {
       position: relative; overflow: hidden;
-      aspect-ratio: 4/3; background: #111; cursor: pointer;
+      background: #0d0d0d; cursor: pointer;
+    }
+    .photo-grid-item.vertical {
+      aspect-ratio: 9/16;
+      max-height: 560px;
     }
     .photo-grid-item img {
       width: 100%; height: 100%; object-fit: cover;
       transition: transform .6s ease;
-      filter: saturate(.85);
+      filter: saturate(.85) brightness(.95);
     }
-    .photo-grid-item:hover img { transform: scale(1.05); filter: saturate(1); }
+    .photo-grid-item:hover img { transform: scale(1.04); filter: saturate(1) brightness(1); }
     .photo-grid-item .photo-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(13,13,13,.7) 0%, transparent 60%);
-      opacity: 0; transition: opacity .4s;
+      background: linear-gradient(to top, rgba(13,13,13,.8) 0%, rgba(13,13,13,.05) 55%);
+      opacity: 0; transition: opacity .35s;
       display: flex; align-items: flex-end; padding: 20px;
     }
     .photo-grid-item:hover .photo-overlay { opacity: 1; }
@@ -297,8 +324,13 @@
       font-size: 13px; letter-spacing: .15em; text-transform: uppercase;
       color: var(--off);
     }
-    .photo-grid-item.wide { grid-column: span 2; }
-    .photo-grid-item.tall { grid-row: span 2; aspect-ratio: unset; }
+    .shorts-badge {
+      position: absolute; top: 14px; left: 14px; z-index: 2;
+      font-family: var(--font-display); font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      background: var(--red); color: var(--off);
+      padding: 4px 10px;
+    }
 
     /* ─── WHY ─── */
     #why { background: var(--black); text-align: center; }
@@ -499,8 +531,9 @@
       .intro-strip { padding: 56px 24px; }
       .service-block { grid-template-columns: 1fr; gap: 40px; }
       .service-block.reverse { direction: ltr; }
-      .photo-grid { grid-template-columns: repeat(2, 1fr); }
-      .photo-grid-item.wide { grid-column: span 1; }
+      .photo-grid-top { grid-template-columns: 1fr; }
+      .photo-grid-top .photo-grid-item { aspect-ratio: 16/9; }
+      .short-strip { height: 180px; }
       .why-grid { grid-template-columns: 1fr; gap: 24px; }
       .form-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 36px; }
@@ -573,8 +606,8 @@
     <div class="service-block">
       <div class="service-video-wrap">
         <img
-          src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/69aa6e4e-4cc8-45b1-8b61-0dd01f6f952e/TLOTDL_Banner.png"
-          alt="The Life of Taurean Dorotae Lee – Feature Documentary"
+          src="https://i.ytimg.com/vi/RWzzBpUCg28/maxresdefault.jpg"
+          alt="Perez & Co. Films – Brand Film"
           loading="lazy"
           style="width:100%;height:100%;object-fit:cover;"
         />
@@ -598,8 +631,8 @@
     <div class="service-block reverse">
       <div class="service-video-wrap">
         <img
-          src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/e6df6ba0-fd3e-4635-880a-f31a0d4508ca/USC+Timeline+Copy+01.00_01_44_13.Still004.jpg"
-          alt="The Poetry of Us – Alegria Publishing Documentary"
+          src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg"
+          alt="Perez & Co. Films – Documentary"
           loading="lazy"
           style="width:100%;height:100%;object-fit:cover;"
         />
@@ -623,8 +656,8 @@
     <div class="service-block">
       <div class="service-video-wrap">
         <img
-          src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d0e54359-67f2-48ce-a735-41a45d6bd033/Untitled+design.png"
-          alt="Elevate Church – Cinematic Brand Film"
+          src="https://i.ytimg.com/vi/FAibXY8Ld8k/maxresdefault.jpg"
+          alt="Perez & Co. Films – Content System"
           loading="lazy"
           style="width:100%;height:100%;object-fit:cover;"
         />
@@ -652,27 +685,42 @@
       <h2 class="section-title">From the Portfolio</h2>
       <p class="section-body">UFC. Frontera Wines. LAFD. Firefly Fabrication. Alegria Publishing. Elevate Church. Here's a look at what we've built.</p>
     </div>
-    <div class="photo-grid">
-      <div class="photo-grid-item wide">
-        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/69aa6e4e-4cc8-45b1-8b61-0dd01f6f952e/TLOTDL_Banner.png" alt="The Life of Taurean Dorotae Lee" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">The Life of Taurean Dorotae Lee · Feature Documentary</span></div>
+    <!-- Row 1: 3 horizontal films -->
+    <div class="photo-grid-top">
+      <div class="photo-grid-item">
+        <a href="https://youtu.be/zut4Uf0J1VI" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
+          <img src="https://i.ytimg.com/vi/zut4Uf0J1VI/maxresdefault.jpg" alt="Perez & Co. Films Showreel" loading="lazy" />
+          <div class="photo-overlay"><span class="photo-overlay-text">Showreel · Watch ↗</span></div>
+        </a>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/a48b1294-d098-495b-bbb1-e90f00c8daa1/ROAD2OVERALLCHAMP_MockupPoster.png" alt="Road 2 Overall Champion" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Road 2 Overall Champion · Mini-Doc</span></div>
+        <a href="https://youtu.be/RWzzBpUCg28" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
+          <img src="https://i.ytimg.com/vi/RWzzBpUCg28/maxresdefault.jpg" alt="Perez & Co. Films – Brand Film" loading="lazy" />
+          <div class="photo-overlay"><span class="photo-overlay-text">Brand Film · Watch ↗</span></div>
+        </a>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/1763425193398-QPYHNNDNWUX1X7DJRP71/Firefly.png" alt="Firefly Food Truck Fabrication" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Firefly Fabrication · Brand Film</span></div>
+        <a href="https://youtu.be/UfOgedX40aU" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
+          <img src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="Perez & Co. Films – Documentary" loading="lazy" />
+          <div class="photo-overlay"><span class="photo-overlay-text">Documentary · Watch ↗</span></div>
+        </a>
       </div>
-      <div class="photo-grid-item">
-        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/e6df6ba0-fd3e-4635-880a-f31a0d4508ca/USC+Timeline+Copy+01.00_01_44_13.Still004.jpg" alt="The Poetry of Us" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">The Poetry of Us · Alegria Publishing</span></div>
-      </div>
-      <div class="photo-grid-item wide">
-        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d0e54359-67f2-48ce-a735-41a45d6bd033/Untitled+design.png" alt="Elevate Church" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Elevate Church · Pastor Mauricio Ruiz</span></div>
-      </div>
+    </div>
+
+    <!-- Row 2+3: each Short full-width cinematic strip -->
+    <div class="short-strip">
+      <span class="shorts-badge">Shorts</span>
+      <a href="https://youtube.com/shorts/GtBdR4RVajY" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
+        <img src="https://i.ytimg.com/vi/GtBdR4RVajY/maxresdefault.jpg" alt="Perez & Co. Films – Short" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">Watch on YouTube ↗</span></div>
+      </a>
+    </div>
+    <div class="short-strip">
+      <span class="shorts-badge">Shorts</span>
+      <a href="https://youtube.com/shorts/QJF74527qYk" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
+        <img src="https://i.ytimg.com/vi/QJF74527qYk/maxresdefault.jpg" alt="Perez & Co. Films – Short" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">Watch on YouTube ↗</span></div>
+      </a>
     </div>
   </section>
 
