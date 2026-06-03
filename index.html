@@ -223,16 +223,36 @@
     .service-video-wrap {
       position: relative; overflow: hidden;
       aspect-ratio: 16/9; background: #111;
+      cursor: pointer;
     }
-    .service-video-wrap video {
+    .service-video-wrap img {
       width: 100%; height: 100%; object-fit: cover;
-      transition: transform .5s ease;
+      transition: transform .5s ease, filter .3s;
+      filter: brightness(.85);
     }
-    .service-video-wrap:hover video { transform: scale(1.03); }
+    .service-video-wrap:hover img { transform: scale(1.03); filter: brightness(1); }
+    .service-video-wrap .play-btn {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; transition: opacity .3s;
+    }
+    .service-video-wrap .play-btn svg {
+      width: 56px; height: 56px;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,.6));
+      transition: transform .2s;
+    }
+    .service-video-wrap:hover .play-btn svg { transform: scale(1.12); }
+    .service-video-wrap.playing img,
+    .service-video-wrap.playing .play-btn { opacity: 0; pointer-events: none; }
+    .service-video-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: none;
+    }
     .service-video-wrap::after {
       content: ''; position: absolute; inset: 0;
       border: 2px solid transparent;
       transition: border-color .3s;
+      pointer-events: none;
     }
     .service-video-wrap:hover::after { border-color: var(--red); }
     .service-text .service-number {
@@ -266,70 +286,145 @@
       background: var(--red); flex-shrink: 0;
     }
 
-    /* ─── WORK / PHOTO GRID ─── */
-    #work { background: var(--gray); padding-bottom: 0; }
-    .work-header { text-align: center; margin-bottom: 56px; }
+    /* ─── WORK SECTION ─── */
+    #work { background: var(--gray); padding-bottom: 80px; }
+    .work-header { text-align: center; margin-bottom: 64px; }
     .work-header .section-body { margin: 0 auto; max-width: 560px; }
-    /* Row 1: 3 equal horizontal tiles */
-    .photo-grid-top {
+
+    /* 3 horizontal playable embeds */
+    .films-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      margin-bottom: 3px;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto 80px;
     }
-    .photo-grid-top .photo-grid-item { aspect-ratio: 16/9; }
-    /* Row 2+: full-width cinematic strips for Shorts */
-    .short-strip {
-      position: relative; overflow: hidden;
-      width: 100%; height: 280px;
-      margin-top: 3px; cursor: pointer;
-      background: #0d0d0d;
+    .film-tile {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
     }
-    .short-strip img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
-      transition: transform .6s ease;
-      filter: saturate(.85) brightness(.95);
-    }
-    .short-strip:hover img { transform: scale(1.03); filter: saturate(1) brightness(1); }
-    .short-strip .photo-overlay {
+    .film-tile iframe {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(13,13,13,.8) 0%, rgba(13,13,13,.05) 55%);
-      opacity: 0; transition: opacity .35s;
-      display: flex; align-items: flex-end; padding: 20px;
+      width: 100%; height: 100%;
+      border: none;
     }
-    .short-strip:hover .photo-overlay { opacity: 1; }
-    .photo-grid-item {
-      position: relative; overflow: hidden;
-      background: #0d0d0d; cursor: pointer;
-    }
-    .photo-grid-item.vertical {
-      aspect-ratio: 9/16;
-      max-height: 560px;
-    }
-    .photo-grid-item img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .6s ease;
-      filter: saturate(.85) brightness(.95);
-    }
-    .photo-grid-item:hover img { transform: scale(1.04); filter: saturate(1) brightness(1); }
-    .photo-grid-item .photo-overlay {
+    .film-tile .film-thumb {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(13,13,13,.8) 0%, rgba(13,13,13,.05) 55%);
-      opacity: 0; transition: opacity .35s;
-      display: flex; align-items: flex-end; padding: 20px;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease, opacity .3s;
+      filter: brightness(.85);
     }
-    .photo-grid-item:hover .photo-overlay { opacity: 1; }
-    .photo-overlay-text {
+    .film-tile:hover .film-thumb { transform: scale(1.03); filter: brightness(1); }
+    .film-tile .play-btn {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; transition: opacity .3s;
+    }
+    .film-tile .play-btn svg {
+      width: 56px; height: 56px;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,.6));
+      transition: transform .2s;
+    }
+    .film-tile:hover .play-btn svg { transform: scale(1.12); }
+    .film-tile.playing .film-thumb,
+    .film-tile.playing .play-btn { opacity: 0; pointer-events: none; }
+    .film-tile .film-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(to top, rgba(13,13,13,.9) 0%, transparent 100%);
       font-family: var(--font-display);
-      font-size: 13px; letter-spacing: .15em; text-transform: uppercase;
-      color: var(--off);
+      font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(245,245,240,.7);
+      transition: opacity .3s;
+      z-index: 2;
     }
-    .shorts-badge {
-      position: absolute; top: 14px; left: 14px; z-index: 2;
-      font-family: var(--font-display); font-size: 10px;
-      letter-spacing: .2em; text-transform: uppercase;
-      background: var(--red); color: var(--off);
-      padding: 4px 10px;
+    .film-tile.playing .film-label { opacity: 0; }
+
+    /* Shorts in phone mockups */
+    .shorts-row {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .phone-mockup {
+      position: relative;
+      width: 280px;
+      flex-shrink: 0;
+    }
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 44px;
+      background: #1a1a1a;
+      border: 3px solid #2e2e2e;
+      box-shadow:
+        0 0 0 1px #111,
+        0 32px 80px rgba(0,0,0,.7),
+        inset 0 0 0 1px #333;
+      overflow: hidden;
+      aspect-ratio: 9/19.5;
+    }
+    /* notch */
+    .phone-frame::before {
+      content: '';
+      position: absolute; top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 90px; height: 28px;
+      background: #1a1a1a;
+      border-radius: 0 0 18px 18px;
+      z-index: 10;
+    }
+    /* side button */
+    .phone-frame::after {
+      content: '';
+      position: absolute; right: -5px; top: 100px;
+      width: 4px; height: 60px;
+      background: #2e2e2e;
+      border-radius: 0 3px 3px 0;
+    }
+    .phone-screen {
+      position: absolute;
+      inset: 0;
+      border-radius: 42px;
+      overflow: hidden;
+      background: #000;
+    }
+    .phone-screen iframe {
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .phone-screen .film-thumb {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: opacity .3s;
+    }
+    .phone-screen .play-btn {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; cursor: pointer;
+      transition: opacity .3s;
+    }
+    .phone-screen .play-btn svg {
+      width: 52px; height: 52px;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,.7));
+      transition: transform .2s;
+    }
+    .phone-screen:hover .play-btn svg { transform: scale(1.12); }
+    .phone-screen.playing .film-thumb,
+    .phone-screen.playing .play-btn { opacity: 0; pointer-events: none; }
+    .phone-label {
+      text-align: center;
+      margin-top: 20px;
+      font-family: var(--font-display);
+      font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+      color: rgba(245,245,240,.4);
     }
 
     /* ─── WHY ─── */
@@ -531,9 +626,9 @@
       .intro-strip { padding: 56px 24px; }
       .service-block { grid-template-columns: 1fr; gap: 40px; }
       .service-block.reverse { direction: ltr; }
-      .photo-grid-top { grid-template-columns: 1fr; }
-      .photo-grid-top .photo-grid-item { aspect-ratio: 16/9; }
-      .short-strip { height: 180px; }
+      .films-row { grid-template-columns: 1fr; }
+      .shorts-row { gap: 24px; }
+      .phone-mockup { width: 220px; }
       .why-grid { grid-template-columns: 1fr; gap: 24px; }
       .form-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 36px; }
@@ -604,13 +699,11 @@
 
     <!-- Service 1: Brand Films -->
     <div class="service-block">
-      <div class="service-video-wrap">
-        <img
-          src="https://i.ytimg.com/vi/RWzzBpUCg28/maxresdefault.jpg"
-          alt="Perez & Co. Films – Brand Film"
-          loading="lazy"
-          style="width:100%;height:100%;object-fit:cover;"
-        />
+      <div class="service-video-wrap" data-id="kWHJukH9gjE">
+        <img src="https://i.ytimg.com/vi/kWHJukH9gjE/maxresdefault.jpg" alt="Perez & Co. Films – Brand Film" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="play-btn">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/><polygon points="28,20 56,36 28,52" fill="#F5F5F0"/></svg>
+        </div>
       </div>
       <div class="service-text">
         <div class="service-number">01</div>
@@ -629,13 +722,11 @@
 
     <!-- Service 2: Documentaries -->
     <div class="service-block reverse">
-      <div class="service-video-wrap">
-        <img
-          src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg"
-          alt="Perez & Co. Films – Documentary"
-          loading="lazy"
-          style="width:100%;height:100%;object-fit:cover;"
-        />
+      <div class="service-video-wrap" data-id="UfOgedX40aU">
+        <img src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="Perez & Co. Films – Documentary" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="play-btn">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/><polygon points="28,20 56,36 28,52" fill="#F5F5F0"/></svg>
+        </div>
       </div>
       <div class="service-text">
         <div class="service-number">02</div>
@@ -654,13 +745,11 @@
 
     <!-- Service 3: Content & Social -->
     <div class="service-block">
-      <div class="service-video-wrap">
-        <img
-          src="https://i.ytimg.com/vi/FAibXY8Ld8k/maxresdefault.jpg"
-          alt="Perez & Co. Films – Content System"
-          loading="lazy"
-          style="width:100%;height:100%;object-fit:cover;"
-        />
+      <div class="service-video-wrap" data-id="FAibXY8Ld8k">
+        <img src="https://i.ytimg.com/vi/FAibXY8Ld8k/maxresdefault.jpg" alt="Perez & Co. Films – Content System" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="play-btn">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/><polygon points="28,20 56,36 28,52" fill="#F5F5F0"/></svg>
+        </div>
       </div>
       <div class="service-text">
         <div class="service-number">03</div>
@@ -678,49 +767,78 @@
     </div>
   </section>
 
-  <!-- ─── WORK / PHOTO GRID ─── -->
+  <!-- ─── WORK ─── -->
   <section id="work">
     <div class="work-header">
       <div class="section-label">Selected Work</div>
       <h2 class="section-title">From the Portfolio</h2>
-      <p class="section-body">UFC. Frontera Wines. LAFD. Firefly Fabrication. Alegria Publishing. Elevate Church. Here's a look at what we've built.</p>
+      <p class="section-body">UFC. Frontera Wines. LAFD. Firefly Fabrication. Alegria Publishing. Elevate Church. Click any film to watch.</p>
     </div>
-    <!-- Row 1: 3 horizontal films -->
-    <div class="photo-grid-top">
-      <div class="photo-grid-item">
-        <a href="https://youtu.be/zut4Uf0J1VI" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
-          <img src="https://i.ytimg.com/vi/zut4Uf0J1VI/maxresdefault.jpg" alt="Perez & Co. Films Showreel" loading="lazy" />
-          <div class="photo-overlay"><span class="photo-overlay-text">Showreel · Watch ↗</span></div>
-        </a>
+
+    <!-- 3 horizontal playable films -->
+    <div class="films-row">
+      <div class="film-tile" data-id="kWHJukH9gjE">
+        <img class="film-thumb" src="https://i.ytimg.com/vi/kWHJukH9gjE/maxresdefault.jpg" alt="Brand Film" />
+        <div class="play-btn">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/>
+            <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
+          </svg>
+        </div>
+        <div class="film-label">Brand Film</div>
       </div>
-      <div class="photo-grid-item">
-        <a href="https://youtu.be/RWzzBpUCg28" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
-          <img src="https://i.ytimg.com/vi/RWzzBpUCg28/maxresdefault.jpg" alt="Perez & Co. Films – Brand Film" loading="lazy" />
-          <div class="photo-overlay"><span class="photo-overlay-text">Brand Film · Watch ↗</span></div>
-        </a>
+      <div class="film-tile" data-id="UfOgedX40aU">
+        <img class="film-thumb" src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="Documentary" />
+        <div class="play-btn">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/>
+            <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
+          </svg>
+        </div>
+        <div class="film-label">Documentary</div>
       </div>
-      <div class="photo-grid-item">
-        <a href="https://youtu.be/UfOgedX40aU" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
-          <img src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="Perez & Co. Films – Documentary" loading="lazy" />
-          <div class="photo-overlay"><span class="photo-overlay-text">Documentary · Watch ↗</span></div>
-        </a>
+      <div class="film-tile" data-id="FAibXY8Ld8k">
+        <img class="film-thumb" src="https://i.ytimg.com/vi/FAibXY8Ld8k/maxresdefault.jpg" alt="Brand Film" />
+        <div class="play-btn">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/>
+            <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
+          </svg>
+        </div>
+        <div class="film-label">Brand Film</div>
       </div>
     </div>
 
-    <!-- Row 2+3: each Short full-width cinematic strip -->
-    <div class="short-strip">
-      <span class="shorts-badge">Shorts</span>
-      <a href="https://youtube.com/shorts/GtBdR4RVajY" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
-        <img src="https://i.ytimg.com/vi/GtBdR4RVajY/maxresdefault.jpg" alt="Perez & Co. Films – Short" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Watch on YouTube ↗</span></div>
-      </a>
-    </div>
-    <div class="short-strip">
-      <span class="shorts-badge">Shorts</span>
-      <a href="https://youtube.com/shorts/QJF74527qYk" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;">
-        <img src="https://i.ytimg.com/vi/QJF74527qYk/maxresdefault.jpg" alt="Perez & Co. Films – Short" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Watch on YouTube ↗</span></div>
-      </a>
+    <!-- 2 Shorts in phone mockups -->
+    <div class="shorts-row">
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-screen" data-id="GtBdR4RVajY" data-type="short">
+            <img class="film-thumb" src="https://i.ytimg.com/vi/GtBdR4RVajY/maxresdefault.jpg" alt="Short" />
+            <div class="play-btn">
+              <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/>
+                <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Short · Watch on YouTube</div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-screen" data-id="QJF74527qYk" data-type="short">
+            <img class="film-thumb" src="https://i.ytimg.com/vi/QJF74527qYk/maxresdefault.jpg" alt="Short" />
+            <div class="play-btn">
+              <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="36" cy="36" r="36" fill="rgba(13,13,13,0.55)"/>
+                <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Short · Watch on YouTube</div>
+      </div>
     </div>
   </section>
 
@@ -984,7 +1102,47 @@
       }
     }
 
-    // ─── Fade-in on scroll ───
+    // ─── Click-to-play: service video wraps ───
+    document.querySelectorAll('.service-video-wrap[data-id]').forEach(wrap => {
+      wrap.addEventListener('click', () => {
+        const id = wrap.dataset.id;
+        if (wrap.classList.contains('playing')) return;
+        wrap.classList.add('playing');
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+        iframe.allow = 'autoplay; fullscreen';
+        iframe.allowFullscreen = true;
+        wrap.appendChild(iframe);
+      });
+    });
+
+    // ─── Click-to-play: horizontal film tiles ───
+    document.querySelectorAll('.film-tile').forEach(tile => {
+      tile.addEventListener('click', () => {
+        const id = tile.dataset.id;
+        if (tile.classList.contains('playing')) return;
+        tile.classList.add('playing');
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+        iframe.allow = 'autoplay; fullscreen';
+        iframe.allowFullscreen = true;
+        tile.appendChild(iframe);
+      });
+    });
+
+    // ─── Click-to-play: phone screen Shorts ───
+    document.querySelectorAll('.phone-screen').forEach(screen => {
+      screen.addEventListener('click', () => {
+        const id = screen.dataset.id;
+        if (screen.classList.contains('playing')) return;
+        screen.classList.add('playing');
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+        iframe.allow = 'autoplay; fullscreen';
+        iframe.allowFullscreen = true;
+        screen.appendChild(iframe);
+      });
+    });
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
