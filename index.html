@@ -730,7 +730,7 @@
       </div>
       <div class="service-text">
         <div class="service-number">02</div>
-        <h3>Documentary<br>Production</h3>
+        <h3>Brand Commercial<br>Video</h3>
         <p>Long-form storytelling that goes deeper. From 47-minute features to branded mini-docs — we bring the craft of documentary filmmaking to your subject matter.</p>
         <ul class="service-list">
           <li>Short-Form Mini-Docs (5–15 min)</li>
@@ -753,7 +753,7 @@
       </div>
       <div class="service-text">
         <div class="service-number">03</div>
-        <h3>Authority Content<br>System</h3>
+        <h3>Documentary<br>Production</h3>
         <p>Built for businesses that need consistent, high-performing content. We shoot, edit, and deliver a content library that keeps your brand active across every channel.</p>
         <ul class="service-list">
           <li>YouTube &amp; Long-Form Video</li>
@@ -795,7 +795,7 @@
             <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
           </svg>
         </div>
-        <div class="film-label">Documentary</div>
+        <div class="film-label">Brand Commercial</div>
       </div>
       <div class="film-tile" data-id="FAibXY8Ld8k">
         <img class="film-thumb" src="https://i.ytimg.com/vi/FAibXY8Ld8k/maxresdefault.jpg" alt="Brand Film" />
@@ -805,7 +805,7 @@
             <polygon points="28,20 56,36 28,52" fill="#F5F5F0"/>
           </svg>
         </div>
-        <div class="film-label">Brand Film</div>
+        <div class="film-label">Documentary</div>
       </div>
     </div>
 
@@ -1161,6 +1161,178 @@
       el.style.transition = 'opacity .7s ease, transform .7s ease';
       observer.observe(el);
     });
+  </script>
+
+  <!-- ─── LEAD CAPTURE POPUP ─── -->
+  <div id="leadPopup" class="lead-popup">
+    <div class="lead-popup-inner">
+      <button class="lead-popup-close" onclick="closePopup()" aria-label="Close">✕</button>
+      <div class="lead-popup-label">Limited Availability</div>
+      <h3 class="lead-popup-title">Let's Build<br>Your Film</h3>
+      <p class="lead-popup-sub">Tell us about your project and we'll follow up within 24 hours.</p>
+      <form class="lead-popup-form" id="leadForm" onsubmit="submitLead(event)">
+        <div class="lead-field">
+          <input type="text" name="name" placeholder="Your Name" required />
+        </div>
+        <div class="lead-field">
+          <input type="tel" name="phone" placeholder="Phone Number" />
+        </div>
+        <div class="lead-field">
+          <input type="email" name="email" placeholder="Email Address" required />
+        </div>
+        <div class="lead-field">
+          <input type="text" name="business" placeholder="What Do You Do / Your Business" required />
+        </div>
+        <div class="lead-field">
+          <select name="video_type" required>
+            <option value="" disabled selected>Type of Video Needed</option>
+            <option>Brand Story Film</option>
+            <option>Brand Commercial</option>
+            <option>Documentary</option>
+            <option>Event Coverage</option>
+            <option>Short-Form / Reels Content</option>
+            <option>Not Sure Yet</option>
+          </select>
+        </div>
+        <button type="submit" class="lead-popup-submit">Send My Details</button>
+      </form>
+    </div>
+  </div>
+  <div id="leadOverlay" class="lead-overlay" onclick="closePopup()"></div>
+
+  <style>
+    .lead-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 199;
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(3px);
+      opacity: 0; transition: opacity .35s;
+    }
+    .lead-overlay.active { display: block; opacity: 1; }
+
+    .lead-popup {
+      position: fixed;
+      bottom: -100%;
+      right: 32px;
+      z-index: 200;
+      width: 360px;
+      background: #141414;
+      border: 1px solid rgba(245,245,240,.1);
+      border-top: 3px solid var(--red);
+      box-shadow: 0 24px 80px rgba(0,0,0,.7);
+      transition: bottom .5s cubic-bezier(.22,1,.36,1), opacity .35s;
+      opacity: 0;
+    }
+    .lead-popup.active {
+      bottom: 32px;
+      opacity: 1;
+    }
+    .lead-popup-inner { padding: 32px 28px 28px; }
+    .lead-popup-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; cursor: pointer;
+      font-size: 16px; color: rgba(245,245,240,.4);
+      transition: color .2s; line-height: 1;
+    }
+    .lead-popup-close:hover { color: var(--red); }
+    .lead-popup-label {
+      font-family: var(--font-display);
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 8px;
+    }
+    .lead-popup-title {
+      font-family: var(--font-display);
+      font-size: 34px; font-weight: 900; text-transform: uppercase;
+      line-height: .95; color: var(--off);
+      margin-bottom: 10px;
+    }
+    .lead-popup-sub {
+      font-family: var(--font-body);
+      font-size: 14px; font-weight: 300; line-height: 1.6;
+      color: rgba(245,245,240,.55);
+      margin-bottom: 20px;
+    }
+    .lead-popup-form { display: flex; flex-direction: column; gap: 10px; }
+    .lead-field input,
+    .lead-field select {
+      width: 100%;
+      background: rgba(245,245,240,.05);
+      border: 1px solid rgba(245,245,240,.1);
+      color: var(--off);
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .lead-field input::placeholder { color: rgba(245,245,240,.3); }
+    .lead-field input:focus,
+    .lead-field select:focus { border-color: var(--red); }
+    .lead-field select { cursor: pointer; }
+    .lead-field select option { background: #141414; }
+    .lead-popup-submit {
+      width: 100%;
+      font-family: var(--font-display);
+      font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+      background: var(--red); color: var(--off);
+      border: none; cursor: pointer;
+      padding: 14px;
+      margin-top: 4px;
+      transition: background .2s, transform .15s;
+    }
+    .lead-popup-submit:hover { background: #c01515; transform: translateY(-1px); }
+
+    @media (max-width: 900px) {
+      .lead-popup { width: calc(100vw - 32px); right: 16px; }
+      .lead-popup.active { bottom: 16px; }
+    }
+  </style>
+
+  <script>
+    // ─── Lead popup: trigger once after scrolling past hero ───
+    let popupShown = false;
+    let popupDismissed = false;
+
+    window.addEventListener('scroll', () => {
+      if (popupShown || popupDismissed) return;
+      const heroH = document.querySelector('.hero').offsetHeight;
+      if (window.scrollY > heroH * 0.85) {
+        setTimeout(() => {
+          if (popupDismissed) return;
+          document.getElementById('leadPopup').classList.add('active');
+          document.getElementById('leadOverlay').classList.add('active');
+          popupShown = true;
+        }, 600);
+      }
+    });
+
+    function closePopup() {
+      document.getElementById('leadPopup').classList.remove('active');
+      document.getElementById('leadOverlay').classList.remove('active');
+      popupDismissed = true;
+    }
+
+    async function submitLead(e) {
+      e.preventDefault();
+      const btn = document.querySelector('.lead-popup-submit');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+          method: 'POST',
+          body: new FormData(e.target),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          btn.textContent = '✓ We\'ll be in touch!';
+          setTimeout(closePopup, 2000);
+        } else { throw new Error(); }
+      } catch {
+        btn.textContent = 'Error — Try Again';
+        btn.disabled = false;
+      }
+    }
   </script>
 </body>
 </html>
