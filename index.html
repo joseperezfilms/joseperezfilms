@@ -86,10 +86,16 @@
       text-align: center; overflow: hidden;
     }
     .hero-video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 177.78vh; /* 16:9 */
+      min-width: 100%;
+      height: 56.25vw; /* 16:9 */
+      min-height: 100%;
+      object-fit: cover;
       z-index: 0;
+      pointer-events: none;
     }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
@@ -523,15 +529,14 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <!--
-      PLACEHOLDER: Replace the src below with your own reel/showreel MP4.
-      Recommended: a ~30–60s looping highlight reel, 1920×1080, muted, .mp4
-      Example: src="videos/hero-reel.mp4"
-    -->
-    <video class="hero-video" autoplay muted loop playsinline
-      poster="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80">
-      <!-- <source src="videos/hero-reel.mp4" type="video/mp4" /> -->
-    </video>
+    <iframe
+      class="hero-video"
+      src="https://www.youtube.com/embed/zut4Uf0J1VI?autoplay=1&mute=1&loop=1&playlist=zut4Uf0J1VI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      title="Perez & Co. Films Showreel"
+    ></iframe>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Jose Perez · Brand Films &amp; Documentaries</p>
@@ -567,14 +572,12 @@
     <!-- Service 1: Brand Films -->
     <div class="service-block">
       <div class="service-video-wrap">
-        <!--
-          PLACEHOLDER: Replace src with a brand film sample clip.
-          Example: src="videos/brand-film-sample.mp4"
-        -->
-        <video autoplay muted loop playsinline
-          poster="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&q=80">
-          <!-- <source src="videos/brand-film-sample.mp4" type="video/mp4" /> -->
-        </video>
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/69aa6e4e-4cc8-45b1-8b61-0dd01f6f952e/TLOTDL_Banner.png"
+          alt="The Life of Taurean Dorotae Lee – Feature Documentary"
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;"
+        />
       </div>
       <div class="service-text">
         <div class="service-number">01</div>
@@ -594,14 +597,12 @@
     <!-- Service 2: Documentaries -->
     <div class="service-block reverse">
       <div class="service-video-wrap">
-        <!--
-          PLACEHOLDER: Replace src with a documentary sample clip.
-          Example: src="videos/doc-sample.mp4"
-        -->
-        <video autoplay muted loop playsinline
-          poster="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=900&q=80">
-          <!-- <source src="videos/doc-sample.mp4" type="video/mp4" /> -->
-        </video>
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/e6df6ba0-fd3e-4635-880a-f31a0d4508ca/USC+Timeline+Copy+01.00_01_44_13.Still004.jpg"
+          alt="The Poetry of Us – Alegria Publishing Documentary"
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;"
+        />
       </div>
       <div class="service-text">
         <div class="service-number">02</div>
@@ -621,14 +622,12 @@
     <!-- Service 3: Content & Social -->
     <div class="service-block">
       <div class="service-video-wrap">
-        <!--
-          PLACEHOLDER: Replace src with a social/content sample clip.
-          Example: src="videos/content-sample.mp4"
-        -->
-        <video autoplay muted loop playsinline
-          poster="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=80">
-          <!-- <source src="videos/content-sample.mp4" type="video/mp4" /> -->
-        </video>
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d0e54359-67f2-48ce-a735-41a45d6bd033/Untitled+design.png"
+          alt="Elevate Church – Cinematic Brand Film"
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;"
+        />
       </div>
       <div class="service-text">
         <div class="service-number">03</div>
@@ -651,34 +650,28 @@
     <div class="work-header">
       <div class="section-label">Selected Work</div>
       <h2 class="section-title">From the Portfolio</h2>
-      <p class="section-body">UFC. Frontera Wines. LAFD. Faith-based. Corporate. Food &amp; Bev. We've shot it all — here's a look.</p>
+      <p class="section-body">UFC. Frontera Wines. LAFD. Firefly Fabrication. Alegria Publishing. Elevate Church. Here's a look at what we've built.</p>
     </div>
-    <!--
-      PHOTO GRID — Replace the src values below with your own portfolio stills.
-      Aim for 1200×900px (4:3) horizontal shots for best results.
-      The .wide item spans 2 columns — pick your best horizontal shot for that one.
-      You can add/remove items as needed.
-    -->
     <div class="photo-grid">
       <div class="photo-grid-item wide">
-        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&q=80" alt="Brand film production" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Brand Film</span></div>
+        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/69aa6e4e-4cc8-45b1-8b61-0dd01f6f952e/TLOTDL_Banner.png" alt="The Life of Taurean Dorotae Lee" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">The Life of Taurean Dorotae Lee · Feature Documentary</span></div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1564996489-e50a84daa6fc?w=600&q=80" alt="Documentary shoot" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Documentary</span></div>
+        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/a48b1294-d098-495b-bbb1-e90f00c8daa1/ROAD2OVERALLCHAMP_MockupPoster.png" alt="Road 2 Overall Champion" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">Road 2 Overall Champion · Mini-Doc</span></div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80" alt="Video production" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Production</span></div>
+        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/1763425193398-QPYHNNDNWUX1X7DJRP71/Firefly.png" alt="Firefly Food Truck Fabrication" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">Firefly Fabrication · Brand Film</span></div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=600&q=80" alt="Corporate film" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Corporate</span></div>
+        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/e6df6ba0-fd3e-4635-880a-f31a0d4508ca/USC+Timeline+Copy+01.00_01_44_13.Still004.jpg" alt="The Poetry of Us" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">The Poetry of Us · Alegria Publishing</span></div>
       </div>
       <div class="photo-grid-item wide">
-        <img src="https://images.unsplash.com/photo-1548544149-4835e62ee5b3?w=1200&q=80" alt="Event coverage" loading="lazy" />
-        <div class="photo-overlay"><span class="photo-overlay-text">Event Coverage</span></div>
+        <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d0e54359-67f2-48ce-a735-41a45d6bd033/Untitled+design.png" alt="Elevate Church" loading="lazy" />
+        <div class="photo-overlay"><span class="photo-overlay-text">Elevate Church · Pastor Mauricio Ruiz</span></div>
       </div>
     </div>
   </section>
@@ -704,6 +697,20 @@
         <div class="why-number">End-to-End</div>
         <h4>Full Production In-House</h4>
         <p>Concept, shoot, edit, color, audio, delivery. One team, one vision, one point of contact. No handoffs, no surprises.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:48px;max-width:860px;margin:72px auto 0;flex-wrap:wrap;">
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg"
+        alt="Jose Perez — Director, Perez & Co. Films"
+        style="width:220px;height:280px;object-fit:cover;object-position:top;flex-shrink:0;border-left:4px solid var(--red);"
+        loading="lazy"
+      />
+      <div>
+        <div class="section-label">The Director</div>
+        <h3 style="font-family:var(--font-display);font-size:clamp(28px,3.5vw,42px);font-weight:900;text-transform:uppercase;color:var(--off);line-height:1;margin-bottom:16px;">Jose Perez</h3>
+        <p style="font-family:var(--font-body);font-size:17px;font-weight:300;line-height:1.8;color:rgba(245,245,240,.72);max-width:500px;">Born from the creative roots of For The Glory Productions, Jose has spent 15+ years chasing authentic moments and documentary truth. Every Perez &amp; Co. Films project is director-led — Jose personally involved from the first strategy call to the final color grade.</p>
+        <p style="margin-top:12px;font-family:var(--font-display);font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,245,240,.4);">Valencia, CA · Featured in Voyage LA</p>
       </div>
     </div>
     <div class="why-cta">
