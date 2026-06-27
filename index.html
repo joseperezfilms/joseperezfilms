@@ -257,7 +257,7 @@
       gap:2px;
     }
     .service-card{
-      background:var(--surface2);
+      background:var(--black);
       padding:48px 40px;
       position:relative;overflow:hidden;
       transition:background 0.3s;
@@ -270,12 +270,31 @@
       transform:scaleX(0);transform-origin:left;
       transition:transform 0.4s var(--ease);
     }
-    .service-card:hover{background:var(--surface3);}
+    .service-card:hover{background:var(--surface2);}
     .service-card:hover::before{transform:scaleX(1);}
     .service-num{
       font-family:var(--sans);font-size:11px;font-weight:700;
       letter-spacing:0.18em;color:var(--red);margin-bottom:24px;
     }
+    .service-thumb-wrap{
+      width:100%;aspect-ratio:16/9;
+      background:#000;
+      border:1px solid var(--border);
+      margin-bottom:28px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .service-play{
+      display:flex;flex-direction:column;align-items:center;gap:12px;
+      text-decoration:none;
+    }
+    .service-play span{
+      font-family:var(--sans);font-size:11px;font-weight:600;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--text-3);transition:color 0.2s;
+    }
+    .service-play:hover span{color:#fff;}
+    .service-play svg circle{transition:fill 0.2s;}
+    .service-play:hover svg circle{fill:#c41515;}
     .service-thumb{
       width:100%;aspect-ratio:16/9;object-fit:cover;
       margin-bottom:28px;opacity:0.8;
@@ -308,7 +327,7 @@
     .service-card:hover .service-cta{gap:12px;}
 
     /* ── PHONE MOCKUPS ── */
-    .vertical{background:var(--surface);}
+    .vertical{background:var(--black);}
     .vertical-inner{
       display:grid;grid-template-columns:1fr 1fr;
       gap:80px;align-items:center;
@@ -451,7 +470,7 @@
     }
 
     /* ── DIRECTOR ── */
-    .director{background:var(--surface);}
+    .director{background:var(--black);}
     .director-inner{
       display:grid;grid-template-columns:5fr 7fr;
       gap:80px;align-items:center;
@@ -530,7 +549,7 @@
     }
     .contact-left{}
     .contact-availability{
-      background:var(--surface2);
+      background:var(--black);
       border:1px solid var(--border);
       border-left:3px solid var(--red);
       padding:24px 28px;margin-top:32px;
@@ -554,7 +573,7 @@
     .form-group input,
     .form-group select,
     .form-group textarea{
-      width:100%;background:var(--surface2);
+      width:100%;background:var(--black);
       border:1px solid var(--border);
       color:#fff;font-family:var(--body);font-size:15px;
       padding:13px 16px;outline:none;border-radius:3px;
@@ -776,7 +795,12 @@
     <div class="services-grid">
       <div class="service-card reveal">
         <p class="service-num">01</p>
-        <img class="service-thumb" src="https://i.ytimg.com/vi/kWHJukH9gjE/maxresdefault.jpg" alt="Brand Story Films" loading="lazy" />
+      <div class="service-thumb-wrap">
+        <a href="https://www.youtube.com/watch?v=kWHJukH9gjE" target="_blank" rel="noopener" class="service-play">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#E01A1A"/><polygon points="18,14 34,22 18,30" fill="#fff"/></svg>
+          <span>Watch Brand Story Film</span>
+        </a>
+      </div>
         <h3 class="service-h3">Brand Story Films</h3>
         <p class="service-desc">Your brand has a story no competitor can copy. We find it, shape it, and put it on screen in a way that makes Bay Area audiences feel something — and act on it.</p>
         <ul class="service-list">
@@ -790,7 +814,12 @@
       </div>
       <div class="service-card reveal reveal-delay-1">
         <p class="service-num">02</p>
-        <img class="service-thumb" src="https://i.ytimg.com/vi/UfOgedX40aU/maxresdefault.jpg" alt="Brand Commercial Video" loading="lazy" />
+      <div class="service-thumb-wrap">
+        <a href="https://www.youtube.com/watch?v=UfOgedX40aU" target="_blank" rel="noopener" class="service-play">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#E01A1A"/><polygon points="18,14 34,22 18,30" fill="#fff"/></svg>
+          <span>Watch Brand Commercial</span>
+        </a>
+      </div>
         <h3 class="service-h3">Brand Commercial Video</h3>
         <p class="service-desc">Short-form and long-form brand commercials built for conversion. From 60-second ads to 5-minute films — cinematic craft meets marketing strategy.</p>
         <ul class="service-list">
@@ -804,7 +833,12 @@
       </div>
       <div class="service-card reveal reveal-delay-2">
         <p class="service-num">03</p>
-        <img class="service-thumb" src="https://i.ytimg.com/vi/FAibXY8Ld8k/maxresdefault.jpg" alt="Documentary Production" loading="lazy" />
+      <div class="service-thumb-wrap">
+        <a href="https://www.primevideo.com/detail/0FGH1W9FC99F86LATV1ZA3SPBS" target="_blank" rel="noopener" class="service-play">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#E01A1A"/><polygon points="18,14 34,22 18,30" fill="#fff"/></svg>
+          <span>Watch Documentary</span>
+        </a>
+      </div>
         <h3 class="service-h3">Documentary Production</h3>
         <p class="service-desc">Long-form storytelling for brands with a story worth the full treatment. From mini-docs to feature-length films — cinematic craft at every level.</p>
         <ul class="service-list">
