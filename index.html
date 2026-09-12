@@ -96,6 +96,41 @@
     }
     .nav-btn:hover{background:#c41515;transform:translateY(-1px);}
 
+    /* ── MOBILE MENU ── */
+    .hamburger{
+      display:none;
+      width:28px;height:20px;position:relative;
+      background:none;border:none;cursor:pointer;
+      flex-direction:column;justify-content:space-between;
+      z-index:210;
+    }
+    .hamburger span{
+      display:block;width:100%;height:2px;background:#fff;
+      transition:transform 0.3s var(--ease),opacity 0.2s;
+    }
+    .hamburger.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+
+    .mobile-menu{
+      position:fixed;inset:0;z-index:150;
+      background:rgba(8,8,8,0.98);
+      backdrop-filter:blur(10px);
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:28px;
+      opacity:0;pointer-events:none;
+      transition:opacity 0.3s var(--ease);
+    }
+    .mobile-menu.open{opacity:1;pointer-events:all;}
+    .mobile-menu a{
+      font-family:var(--sans);font-size:22px;font-weight:600;
+      letter-spacing:0.02em;color:#fff;
+    }
+    .mobile-menu a.mm-btn{
+      background:var(--red);padding:14px 32px;border-radius:2px;
+      font-size:16px;letter-spacing:0.06em;
+    }
+
     /* ── HERO ── */
     .hero{
       position:relative;height:100vh;height:100svh;min-height:560px;
@@ -687,6 +722,7 @@
       .nav{padding:18px 24px;}
       .nav.scrolled{padding:12px 24px;}
       .nav-links{display:none;}
+      .hamburger{display:flex;}
       .hero-content{grid-template-columns:1fr;padding:0 24px 40px;}
       .hero-right{display:none;}
       .hero-h1{font-size:clamp(40px,10vw,72px);}
@@ -728,7 +764,20 @@
     <li><a href="https://rfqgrb-bv.myshopify.com/" target="_blank" rel="noopener">Shop</a></li>
   </ul>
   <a href="#contact" class="nav-btn">Get a Quote</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#faqs">FAQ</a>
+  <a href="https://joseperezfilms.github.io/joseperezphoto/" target="_blank" rel="noopener">Photos</a>
+  <a href="https://rfqgrb-bv.myshopify.com/" target="_blank" rel="noopener">Shop</a>
+  <a href="#contact" class="mm-btn">Get a Quote</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -1228,6 +1277,20 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, {passive:true});
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
 
   // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
