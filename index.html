@@ -23,7 +23,7 @@
   <meta name="ICBM" content="34.3917, -118.5426" />
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"VideoProductionCompany","name":"Perez & Co. Films","url":"https://joseperezfilms.com","founder":{"@type":"Person","name":"Jose Perez"},"description":"Director-led boutique studio creating documentary-style brand films for Los Angeles and Santa Clarita clients, Bay Area agencies, Central Valley businesses, and California brands.","address":{"@type":"PostalAddress","addressLocality":"Santa Clarita","addressRegion":"CA","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Los Angeles"},{"@type":"City","name":"Santa Clarita"},{"@type":"AdministrativeArea","name":"San Francisco Bay Area"},{"@type":"AdministrativeArea","name":"Central Valley California"},{"@type":"AdministrativeArea","name":"Northern California"},{"@type":"State","name":"California"}],"priceRange":"$$$","sameAs":["https://instagram.com/joseperezfilms","https://youtube.com/@joseperezfilms","https://voyagela.com/interview/meet-jose-perez-of-santa-clarita/","https://boldjourney.com/meet-jose-perez-2/"]}
+  {"@context":"https://schema.org","@type":"Person","name":"Jose Perez","url":"https://joseperezfilms.com","jobTitle":"Director & Founder","telephone":"+14084762745","email":"joseperezfilms@gmail.com","image":"https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg","description":"California brand film director and documentary filmmaker serving Los Angeles, Santa Clarita, the Bay Area, and the Central Valley.","address":{"@type":"PostalAddress","addressLocality":"Santa Clarita","addressRegion":"CA","addressCountry":"US"},"worksFor":{"@type":"LocalBusiness","name":"Perez & Co. Films","url":"https://perezandcofilms.com"},"sameAs":["https://instagram.com/joseperezfilms","https://youtube.com/@joseperezfilms","https://linkedin.com/in/joseperezfilms","https://voyagela.com/interview/meet-jose-perez-of-santa-clarita/","https://boldjourney.com/meet-jose-perez-2/"]}
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where are you based and do you travel to the Bay Area?","acceptedAnswer":{"@type":"Answer","text":"We're based in Santa Clarita and actively serve Los Angeles, and we also travel throughout the Bay Area, Silicon Valley, Sacramento, the Central Valley, and across Northern California. Travel is built into your project scope — no hidden fees, no surprises."}},{"@type":"Question","name":"What types of California businesses do you work with?","acceptedAnswer":{"@type":"Answer","text":"LA and Santa Clarita brands, Bay Area agencies and tech brands, Central Valley family-owned businesses and agricultural companies, regional brands with a story worth telling. If you have a goal and a story, we're interested in talking — and we're currently booking new clients."}}]}
@@ -602,6 +602,27 @@
     .contact-availability span{
       font-size:14px;color:var(--text-2);
     }
+    .contact-direct{
+      margin-top:20px;
+      display:flex;flex-direction:column;gap:14px;
+    }
+    .contact-direct-item{
+      display:flex;align-items:center;gap:14px;
+      background:var(--black);
+      border:1px solid var(--border);
+      padding:16px 20px;border-radius:3px;
+      transition:border-color 0.2s,background 0.2s;
+    }
+    .contact-direct-item:hover{border-color:rgba(255,255,255,0.2);background:var(--surface3);}
+    .contact-direct-label{
+      font-family:var(--sans);font-size:10px;font-weight:700;
+      letter-spacing:0.14em;text-transform:uppercase;
+      color:var(--text-3);min-width:52px;
+    }
+    .contact-direct-value{
+      font-family:var(--sans);font-size:14px;font-weight:600;
+      letter-spacing:0.02em;color:#fff;
+    }
     .contact-form{}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
     .form-group{margin-bottom:16px;}
@@ -1142,6 +1163,16 @@
           <p>Currently Booking</p>
           <span>Los Angeles · Santa Clarita · Bay Area · Central Valley</span>
         </div>
+        <div class="contact-direct">
+          <a href="mailto:joseperezfilms@gmail.com" class="contact-direct-item">
+            <span class="contact-direct-label">Email</span>
+            <span class="contact-direct-value">joseperezfilms@gmail.com</span>
+          </a>
+          <a href="tel:4084762745" class="contact-direct-item">
+            <span class="contact-direct-label">Call</span>
+            <span class="contact-direct-value">(408) 476-2745</span>
+          </a>
+        </div>
         <a href="#contact" target="_blank" rel="noopener" class="btn-outline" style="display:inline-block;margin-top:24px;">Fill Out the Contact Form</a>
       </div>
       <div class="contact-form reveal reveal-delay-1">
@@ -1222,10 +1253,11 @@
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
+        <li><a href="mailto:joseperezfilms@gmail.com">joseperezfilms@gmail.com</a></li>
+        <li><a href="tel:4084762745">(408) 476-2745</a></li>
         <li><a href="#work">Portfolio</a></li>
         <li><a href="#faqs">FAQs</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact" target="_blank" rel="noopener">Book a Call</a></li>
         <li><a href="https://perezandcofilms.com" target="_blank" rel="noopener">Studio Site</a></li>
         <li><a href="https://rfqgrb-bv.myshopify.com/" target="_blank" rel="noopener">Shop LUTs</a></li>
       </ul>
