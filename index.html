@@ -39,6 +39,9 @@
   gtag('js', new Date());
   gtag('config', 'AW-17857128381');
   function trackConversion(){ if (typeof gtag === 'function') gtag('event','conversion',{'send_to':'AW-17857128381'}); }
+  window.addEventListener('message', function(e){
+    if (e.data && e.data.type === 'hsFormCallback' && e.data.eventName === 'onFormSubmitted') { trackConversion(); }
+  });
 </script>
 
 <style>
@@ -267,7 +270,8 @@
 
 <section class="hero">
   <div class="hero-media">
-<iframe src="https://www.youtube.com/embed/0SlRijEHTu4?autoplay=1&mute=1&loop=1&playlist=0SlRijEHTu4&controls=0&showinfo=0&rel=0&modestbranding=1" title="Rise from the Ashes — Hero Reel" allow="autoplay; encrypted-media" loading="lazy"></iframe>  </div>
+    <iframe src="https://www.youtube.com/embed/cO6VFEYRP3Y?autoplay=1&mute=1&loop=1&playlist=cO6VFEYRP3Y&controls=0&showinfo=0&rel=0&modestbranding=1" title="Hero reel" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+  </div>
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
     <p class="eyebrow reveal">Director-Led Brand Films</p>
@@ -454,33 +458,10 @@
         <span style="color:var(--muted);">Los Angeles &middot; Santa Clarita &middot; Bay Area &middot; Central Valley</span>
       </div>
     </div>
-    <form class="quote-form reveal" action="https://formspree.io/f/xrevgqwy" method="POST" onsubmit="trackConversion()">
-      <div class="form-row">
-        <div><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
-        <div><label for="email">Email Address</label><input type="email" id="email" name="email" required></div>
-      </div>
-      <div class="form-row">
-        <div><label for="company">Company / Brand</label><input type="text" id="company" name="company"></div>
-        <div><label for="site">Website or Instagram</label><input type="text" id="site" name="website_or_instagram"></div>
-      </div>
-      <div class="form-row">
-        <div>
-          <label for="service">Service Interested In</label>
-          <select id="service" name="service">
-            <option>Brand Story Films</option><option>Brand Commercial Video</option><option>Documentary Production</option><option>Authority Content System (retainer)</option><option>Not sure yet</option>
-          </select>
-        </div>
-        <div>
-          <label for="budget">Approximate Budget</label>
-          <select id="budget" name="budget">
-            <option>Under $5,000</option><option>$5,000 – $10,000</option><option>$10,000 – $20,000</option><option>$20,000+</option>
-          </select>
-        </div>
-      </div>
-      <div><label for="details">Tell Us About Your Project</label><textarea id="details" name="details" required></textarea></div>
-      <button type="submit" class="btn btn-solid" style="justify-self:start;">Send Project Details</button>
-      <p class="form-note">We respond within 24 hours. No spam, ever.</p>
-    </form>
+    <div class="quote-form reveal">
+      <script src="https://js-na2.hsforms.net/forms/embed/247474631.js" defer></script>
+      <div class="hs-form-frame" data-region="na2" data-form-id="dc8359e5-11f2-4241-bc1e-c31282ee1df3" data-portal-id="247474631"></div>
+    </div>
   </div>
 </section>
 
