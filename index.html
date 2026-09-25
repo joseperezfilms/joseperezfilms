@@ -9,14 +9,22 @@
 <!-- Open Graph -->
 <meta property="og:title" content="Jose Perez Films — Director">
 <meta property="og:description" content="Your brand deserves a film, not a video. Documentary-style brand films across California.">
-<meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg">
+<meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg?format=1500w">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg">
+<meta name="twitter:image" content="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg?format=1500w">
 
+<!-- PERF: preconnect to the hosts the page actually needs first -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://images.squarespace-cdn.com">
+
+<!-- PERF: hero poster loads first so the page paints fast -->
+<link rel="preload" as="image" href="https://i.ytimg.com/vi_webp/cO6VFEYRP3Y/maxresdefault.webp" fetchpriority="high">
+
+<!-- PERF: trimmed font weights to only the ones the page uses -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -32,7 +40,7 @@
 }
 </script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17857128381"></script>
+<!-- PERF: gtag stub runs now (so conversions still queue), the Google script itself loads after the page finishes -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -118,9 +126,12 @@
 
   /* HERO */
   .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
-  .hero-media{position:absolute;inset:0;z-index:0;}
+  .hero-media{position:absolute;inset:0;z-index:0;background:#000;}
   .hero-media::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%, rgba(232,36,31,0.16), transparent 55%);}
-  .hero-media iframe{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);pointer-events:none;}
+  /* PERF: poster image shows instantly, the reel fades in over it once loaded */
+  .hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .hero-media iframe{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);pointer-events:none;border:0;opacity:0;transition:opacity 1.2s ease;}
+  .hero-media iframe.ready{opacity:1;}
   .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.45) 35%, rgba(10,10,10,0.96) 100%);}
   .hero-content{position:relative;z-index:2;padding-bottom:110px;padding-top:180px;width:100%;}
   .hero h1{font-size:clamp(2.8rem,8vw,6.4rem);max-width:15ch;letter-spacing:-0.02em;}
@@ -143,7 +154,7 @@
   .service-row:hover{padding-left:16px;}
   .service-row:hover .service-num{color:var(--accent);}
   @media(max-width:860px){ .service-row{grid-template-columns:1fr;gap:14px;} }
-  .service-num{font-family:var(--font-display);font-style:italic;font-size:2.4rem;color:var(--line-strong);transition:color .3s ease;}
+  .service-num{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:2.4rem;color:var(--line-strong);transition:color .3s ease;}
   .service-row h3{font-size:1.9rem;}
   .service-row p{color:var(--muted);margin-top:14px;font-size:1rem;max-width:46ch;}
   .service-list{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px;}
@@ -190,7 +201,7 @@
   .about-portrait{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line);}
   .about-portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(0.35) contrast(1.05);}
   .stats{display:flex;gap:40px;margin-top:30px;flex-wrap:wrap;}
-  .stat-num{font-family:var(--font-display);font-size:3rem;color:var(--accent);}
+  .stat-num{font-family:var(--font-display);font-weight:500;font-size:3rem;color:var(--accent);}
   .stat-label{font-family:var(--font-head);font-size:0.78rem;color:var(--muted);margin-top:6px;max-width:16ch;}
   .about-copy p{color:var(--muted);margin-top:20px;font-size:1.05rem;max-width:62ch;}
   .about-copy h2{margin-bottom:8px;}
@@ -224,6 +235,7 @@
   .contact-methods a:hover{border-color:var(--fg);}
 
   form.quote-form{display:grid;gap:18px;}
+  .quote-form{min-height:520px;}
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
   @media(max-width:560px){ .form-row{grid-template-columns:1fr;} }
   label{font-family:var(--font-head);font-size:0.78rem;color:var(--muted);display:block;margin-bottom:7px;letter-spacing:0.03em;}
@@ -269,8 +281,9 @@
 </header>
 
 <section class="hero">
-  <div class="hero-media">
-    <iframe src="https://www.youtube.com/embed/cO6VFEYRP3Y?autoplay=1&mute=1&loop=1&playlist=cO6VFEYRP3Y&controls=0&showinfo=0&rel=0&modestbranding=1" title="Hero reel" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+  <!-- PERF: poster first, YouTube reel is injected by script after the page finishes loading -->
+  <div class="hero-media" id="heroMedia" data-video="cO6VFEYRP3Y">
+    <img class="hero-poster" src="https://i.ytimg.com/vi_webp/cO6VFEYRP3Y/maxresdefault.webp" alt="" width="1280" height="720" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/cO6VFEYRP3Y/hqdefault.jpg';">
   </div>
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
@@ -367,31 +380,32 @@
       <p class="eyebrow">Selected Work</p>
       <h2>Recent films</h2>
     </div>
+    <!-- PERF: thumbnails now WebP with fixed dimensions -->
     <div class="work-grid">
       <div class="work-item reveal">
         <div class="video-frame" data-video="gjYXz4j1xVQ" onclick="playVideo(this)">
-          <img src="https://img.youtube.com/vi/gjYXz4j1xVQ/hqdefault.jpg" alt="Frontera Wines Brand Activation" loading="lazy">
+          <img src="https://i.ytimg.com/vi_webp/gjYXz4j1xVQ/hqdefault.webp" alt="Frontera Wines Brand Activation" width="480" height="360" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/gjYXz4j1xVQ/hqdefault.jpg';">
           <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="work-caption"><div><span class="eyebrow">Brand Activation</span><h3>Frontera Wines</h3></div></div>
       </div>
       <div class="work-item reveal">
         <div class="video-frame" data-video="8e1VI4KatEc" onclick="playVideo(this)">
-          <img src="https://img.youtube.com/vi/8e1VI4KatEc/hqdefault.jpg" alt="Road 2 Overall Champion Mini-Documentary" loading="lazy">
+          <img src="https://i.ytimg.com/vi_webp/8e1VI4KatEc/hqdefault.webp" alt="Road 2 Overall Champion Mini-Documentary" width="480" height="360" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/8e1VI4KatEc/hqdefault.jpg';">
           <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="work-caption"><div><span class="eyebrow">Mini-Documentary</span><h3>Road 2 Overall Champion</h3></div></div>
       </div>
       <div class="work-item reveal">
         <div class="video-frame" data-video="FAibXY8Ld8k" onclick="playVideo(this)">
-          <img src="https://img.youtube.com/vi/FAibXY8Ld8k/hqdefault.jpg" alt="Road 2 Overall Champion Trailer" loading="lazy">
+          <img src="https://i.ytimg.com/vi_webp/FAibXY8Ld8k/hqdefault.webp" alt="Road 2 Overall Champion Trailer" width="480" height="360" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/FAibXY8Ld8k/hqdefault.jpg';">
           <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="work-caption"><div><span class="eyebrow">Documentary Trailer</span><h3>Road 2 Overall Champion (Trailer)</h3></div></div>
       </div>
       <div class="work-item reveal">
         <div class="video-frame" data-video="jv5-NPzBNcs" onclick="playVideo(this)">
-          <img src="https://img.youtube.com/vi/jv5-NPzBNcs/hqdefault.jpg" alt="David Navas Project Car Documentary" loading="lazy">
+          <img src="https://i.ytimg.com/vi_webp/jv5-NPzBNcs/hqdefault.webp" alt="David Navas Project Car Documentary" width="480" height="360" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/jv5-NPzBNcs/hqdefault.jpg';">
           <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="work-caption"><div><span class="eyebrow">Personal Documentary</span><h3>David Navas — Project Car Doc</h3></div></div>
@@ -403,7 +417,15 @@
 <section id="about">
   <div class="wrap about-grid">
     <div class="about-portrait reveal">
-      <img src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg" alt="Jose Perez, director">
+      <!-- PERF: this was the full size camera JPG. Now the CDN serves a resized copy that fits each screen. -->
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg?format=750w"
+        srcset="https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg?format=500w 500w,
+                https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg?format=750w 750w,
+                https://images.squarespace-cdn.com/content/v1/690a35c5f912667d4f4c037b/d8dfea2c-4f75-4bd4-8c28-434aaa9fa4f1/FTG02793.jpg?format=1000w 1000w"
+        sizes="(max-width: 900px) 100vw, 480px"
+        width="750" height="938"
+        alt="Jose Perez, director" loading="lazy" decoding="async">
     </div>
     <div class="about-copy reveal">
       <p class="eyebrow">Director Profile</p>
@@ -458,8 +480,8 @@
         <span style="color:var(--muted);">Los Angeles &middot; Santa Clarita &middot; Bay Area &middot; Central Valley</span>
       </div>
     </div>
-    <div class="quote-form reveal">
-      <script src="https://js-na2.hsforms.net/forms/embed/247474631.js" defer></script>
+    <!-- PERF: HubSpot form script is loaded by JS only when the visitor scrolls near this section -->
+    <div class="quote-form reveal" id="quoteForm">
       <div class="hs-form-frame" data-region="na2" data-form-id="dc8359e5-11f2-4241-bc1e-c31282ee1df3" data-portal-id="247474631"></div>
     </div>
   </div>
@@ -497,7 +519,7 @@
 
   // Nav scroll state
   const nav = document.getElementById('siteNav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 
   // Mobile menu close on click
   document.querySelectorAll('nav.links a').forEach(a => a.addEventListener('click', () => document.querySelector('nav.links').classList.remove('open')));
@@ -514,6 +536,45 @@
     el.style.cursor = 'default';
     el.removeAttribute('onclick');
   }
+
+  // PERF: everything heavy waits until the page has fully loaded
+  window.addEventListener('load', () => {
+    // Google Ads tag
+    const g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17857128381';
+    document.head.appendChild(g);
+
+    // Hero reel: inject the YouTube background a moment after load, then fade it in over the poster
+    setTimeout(() => {
+      const hero = document.getElementById('heroMedia');
+      const id = hero.getAttribute('data-video');
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&rel=0&modestbranding=1&playsinline=1`;
+      f.title = 'Hero reel';
+      f.setAttribute('allow', 'autoplay; encrypted-media');
+      f.addEventListener('load', () => setTimeout(() => f.classList.add('ready'), 1200));
+      hero.appendChild(f);
+    }, 2500);
+  });
+
+  // PERF: HubSpot form loads only when the visitor gets close to the contact section
+  (function(){
+    let loaded = false;
+    const loadForm = () => {
+      if (loaded) return; loaded = true;
+      const s = document.createElement('script');
+      s.src = 'https://js-na2.hsforms.net/forms/embed/247474631.js';
+      s.defer = true;
+      document.body.appendChild(s);
+    };
+    const formIO = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) { loadForm(); formIO.disconnect(); }
+    }, { rootMargin: '800px 0px' });
+    formIO.observe(document.getElementById('quoteForm'));
+    // Nav links jump straight to #contact, so load the form on those clicks too
+    document.querySelectorAll('a[href="#contact"]').forEach(a => a.addEventListener('click', loadForm));
+  })();
 
   // Stat count-up
   const stats = document.querySelectorAll('.stat-num');
@@ -543,7 +604,7 @@
     window.addEventListener('mousemove', (e) => {
       dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
       ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px';
-    });
+    }, { passive: true });
     document.querySelectorAll('a, button, summary, .video-frame').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
