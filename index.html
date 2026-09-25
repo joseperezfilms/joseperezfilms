@@ -132,7 +132,8 @@
   .hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .hero-media iframe{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);pointer-events:none;border:0;opacity:0;transition:opacity 1.2s ease;}
   .hero-media iframe.ready{opacity:1;}
-  .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.45) 35%, rgba(10,10,10,0.96) 100%);}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.15) 35%, rgba(10,10,10,0.85) 100%);}
+  .hero-content h1,.hero-content .sub,.hero-content .service-areas{text-shadow:0 2px 18px rgba(0,0,0,0.55);}
   .hero-content{position:relative;z-index:2;padding-bottom:110px;padding-top:180px;width:100%;}
   .hero h1{font-size:clamp(2.8rem,8vw,6.4rem);max-width:15ch;letter-spacing:-0.02em;}
   .hero .sub{margin-top:26px;max-width:52ch;color:var(--muted);font-size:1.12rem;}
@@ -159,16 +160,6 @@
   .service-row p{color:var(--muted);margin-top:14px;font-size:1rem;max-width:46ch;}
   .service-list{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px;}
   .service-list li{font-family:var(--font-head);font-size:0.78rem;color:var(--fg);padding:7px 14px;border:1px solid var(--line);border-radius:100px;}
-
-  /* SHORT-FORM */
-  .shortform{background:var(--bg-raised);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .shortform-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:56px;background:var(--line);border:1px solid var(--line);}
-  @media(max-width:920px){ .shortform-grid{grid-template-columns:1fr 1fr;} }
-  @media(max-width:560px){ .shortform-grid{grid-template-columns:1fr;} }
-  .format-card{padding:36px 30px;background:var(--bg-raised);transition:background .25s;}
-  .format-card:hover{background:var(--bg-raised-2);}
-  .format-ratio{font-family:var(--font-head);font-weight:700;color:var(--accent);font-size:1.6rem;}
-  .format-card p{margin-top:12px;color:var(--muted);font-size:0.92rem;}
 
   /* MARQUEE BRAND STRIP */
   .brand-strip{padding:64px 0;border-bottom:1px solid var(--line);overflow:hidden;}
@@ -272,8 +263,8 @@
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
-      <a href="https://joseperezphoto.com" target="_blank" rel="noopener">Photos</a>
-      <a href="#" target="_blank" rel="noopener">Shop</a>
+      <a href="https://joseperezfilms.github.io/joseperezphoto/">Photos</a>
+      <a href="https://joseperezfilms.github.io/risefromtheashesdocumentary/">Donate</a>
       <a href="#contact" class="btn btn-solid" style="padding:11px 20px;">Get a Quote</a>
     </nav>
     <a href="#contact" class="btn btn-solid nav-cta">Get a Quote</a>
@@ -343,21 +334,6 @@
   </div>
 </section>
 
-<section class="shortform">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Every Screen</p>
-      <h2>Content built for <span class="em">every screen.</span></h2>
-      <p>From 9:16 vertical reels to 16:9 cinematic cuts — we deliver your brand story in every format your audience watches on.</p>
-    </div>
-    <div class="shortform-grid stagger">
-      <div class="format-card reveal"><p class="format-ratio">9:16</p><p>Vertical reels optimized for Instagram, TikTok &amp; YouTube Shorts</p></div>
-      <div class="format-card reveal"><p class="format-ratio">16:9</p><p>Horizontal cuts for your website hero, YouTube &amp; presentations</p></div>
-      <div class="format-card reveal"><p class="format-ratio">1:1</p><p>Square edits ready for LinkedIn and Facebook feed</p></div>
-      <div class="format-card reveal"><p class="format-ratio">Hook</p><p>Hook-first edits engineered for paid social ad performance</p></div>
-    </div>
-  </div>
-</section>
 
 <section class="brand-strip">
   <p class="eyebrow">Brands We've Worked With</p>
@@ -500,7 +476,7 @@
       </div>
       <div>
         <h4>Company</h4>
-        <ul class="footer-links"><li><a href="#work">Portfolio</a></li><li><a href="#faq">FAQs</a></li><li><a href="#contact">Contact</a></li><li><a href="https://perezandcofilms.com" target="_blank" rel="noopener">Perez &amp; Co. Films</a></li><li><a href="#" target="_blank" rel="noopener">Shop LUTs</a></li></ul>
+        <ul class="footer-links"><li><a href="#work">Portfolio</a></li><li><a href="#faq">FAQs</a></li><li><a href="#contact">Contact</a></li><li><a href="https://perezandcofilms.com" target="_blank" rel="noopener">Perez &amp; Co. Films</a></li></ul>
       </div>
     </div>
     <div class="footer-bottom">
