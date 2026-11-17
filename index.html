@@ -201,10 +201,25 @@
   .hero-ctas{display:flex;flex-wrap:wrap;gap:16px;margin-top:36px;}
   .cred{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:40px;color:var(--muted-dark);}
   .cred span:not(:last-child)::after{content:"\2022";margin-left:18px;}
-  .hero-photo{position:relative;max-width:460px;margin:0 auto;width:100%;}
-  .hero-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 22%;filter:grayscale(1) contrast(1.12) brightness(.92);-webkit-mask-image:linear-gradient(180deg,#000 75%,transparent);mask-image:linear-gradient(180deg,#000 75%,transparent);}
-  .sticker{position:absolute;background:var(--paper);color:var(--ink);font-family:var(--f-mono);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 14px;box-shadow:0 8px 20px rgba(0,0,0,.4);}
-  .hero-photo .sticker{top:14%;left:-4%;transform:rotate(-4deg);}
+  .hero{min-height:calc(100svh - 76px);display:flex;align-items:flex-end;}
+  .hero-media{position:absolute;inset:0;background:#000;overflow:hidden;}
+  .hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05);}
+  .hero-media iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease;}
+  .hero-media iframe.ready{opacity:1;}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.7) 45%,rgba(10,10,10,.25) 100%),linear-gradient(180deg,rgba(10,10,10,.35) 0%,transparent 30%,rgba(10,10,10,.85) 100%);}
+  @media(max-width:899px){ .hero-shade{background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.75) 50%,rgba(10,10,10,.95) 100%);} }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero h1{text-shadow:0 4px 30px rgba(0,0,0,.45);}
+  .hero-side{display:flex;justify-content:flex-start;align-items:flex-end;align-self:end;}
+  @media(min-width:900px){ .hero-side{justify-content:flex-end;} }
+  .reel-btn{display:flex;align-items:center;gap:16px;background:none;border:0;cursor:pointer;text-align:left;padding:0;color:var(--paper);}
+  .rb-icon{width:72px;height:72px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;flex:0 0 auto;position:relative;transition:transform .25s;}
+  .rb-icon::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid rgba(255,255,255,.6);animation:ring 2.2s ease-out infinite;}
+  .reel-btn:hover .rb-icon{transform:scale(1.07);}
+  .rb-icon svg{width:24px;height:24px;fill:var(--ink);margin-left:4px;}
+  .reel-btn .mono{color:#D8D8D2;line-height:1.5;}
+  .reel-btn b{display:block;font-size:1.05rem;color:var(--paper);letter-spacing:0;margin-top:4px;}
+  @media(prefers-reduced-motion:reduce){ .rb-icon::after{animation:none;} }
 
   /* TICKER */
   .ticker-clip{position:relative;z-index:2;overflow:hidden;margin:-28px 0 -30px;padding:28px 0 30px;}
@@ -437,7 +452,7 @@
 
   /* CLOSING CTA */
   .closing{text-align:center;overflow:hidden;}
-  .closing-bg{position:absolute;inset:0;background:url("jose-closing.jpg") center 20%/cover no-repeat;filter:grayscale(1) brightness(.14) contrast(1.1) blur(2px);transform:scale(1.03);}
+  .closing-bg{position:absolute;inset:0;background:url("jose.jpg") center 20%/cover no-repeat;filter:grayscale(1) brightness(.14) contrast(1.1) blur(2px);transform:scale(1.03);}
   .closing .wrap{position:relative;}
   .closing h2{margin:22px auto 30px;}
   .closing p.sub{color:#CFCFC9;max-width:40ch;margin:0 auto;font-size:1.2rem;}
@@ -523,6 +538,10 @@
 
 <!-- HERO -->
 <section class="hero grunge" id="top">
+  <div class="hero-media" id="heroMedia" data-video="0SlRijEHTu4" aria-hidden="true">
+    <img class="hero-poster" src="https://i.ytimg.com/vi/0SlRijEHTu4/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/0SlRijEHTu4/hqdefault.jpg';" alt="" fetchpriority="high">
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
       <span class="marker reveal">Real people. Real stories.</span>
@@ -534,9 +553,8 @@
       </div>
       <p class="cred mono reveal"><span>15+ Years</span><span>9 Streaming Platforms</span><span>SCIFF 2026 Official Selection</span><span>Director Led</span></p>
     </div>
-    <div class="hero-photo reveal">
-      <img src="jose-portrait.jpg" onerror="this.onerror=null;this.src='jose-closing.jpg';" alt="Jose Perez, documentary director, holding his cinema camera" width="829" height="1036" fetchpriority="high">
-      <span class="sticker">Brands don't need ads. They need stories.</span>
+    <div class="hero-side reveal">
+      <button class="reel-btn" data-video="0SlRijEHTu4" aria-label="Play the Rise from the Ashes sizzle reel with sound"><span class="rb-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="mono">Watch with sound<b class="wide">Rise from the Ashes</b></span></button>
     </div>
   </div>
 </section>
@@ -1114,7 +1132,7 @@
     modal.classList.add('open'); document.body.style.overflow = 'hidden'; closeBtn.focus();
   }
   function closeVideo(){ modal.classList.remove('open'); frame.innerHTML = ''; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
-  document.querySelectorAll('[data-video]').forEach(el => el.addEventListener('click', () => openVideo(el.dataset.video)));
+  document.querySelectorAll('[data-video]:not(#heroMedia)').forEach(el => el.addEventListener('click', () => openVideo(el.dataset.video)));
   closeBtn.addEventListener('click', closeVideo);
   modal.addEventListener('click', e => { if (e.target === modal) closeVideo(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeVideo(); });
@@ -1140,6 +1158,17 @@
     const g = document.createElement('script'); g.async = true;
     g.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17857128381';
     document.head.appendChild(g);
+
+    // Cover video: muted looping Rise from the Ashes sizzle, fades in over the poster
+    if (!reduce) setTimeout(() => {
+      const hm = document.getElementById('heroMedia'), id = hm.dataset.video;
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1`;
+      f.title = 'Rise from the Ashes cover video'; f.tabIndex = -1;
+      f.setAttribute('allow', 'autoplay; encrypted-media');
+      f.addEventListener('load', () => setTimeout(() => f.classList.add('ready'), 1200));
+      hm.appendChild(f);
+    }, 1200);
   });
 </script>
 </body>
